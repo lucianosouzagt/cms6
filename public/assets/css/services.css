@@ -1,0 +1,187 @@
+ 
+ 
+ 
+    .item1  { grid-area:d2x4-1 }
+    .item2  { grid-area:d2x4-2 }
+    .item3  { grid-area:d2x2-1 }
+    .item4  { grid-area:d2x2-2 }
+    .item5  { grid-area:d4x4-1 }
+    .item6  { grid-area:d4x4-2 }
+    .item7  { grid-area:d2x2-3 }
+    .item8  { grid-area:d4x4-3 }
+    .item9  { grid-area:d2x2-4 }
+    .item10 { grid-area:d2x4-3 }
+    .item11 { grid-area:d2x2-5 }
+    .item12 { grid-area:d2x4-4 }
+    .item13 { grid-area:d2x4-5 }
+    .item14 { grid-area:d4x4-4 }
+    .item15 { grid-area:d2x2-6 }
+    .item16 { grid-area:d2x4-6 }
+    .item17 { grid-area:d2x2-7 }
+    .item18 { grid-area:d2x2-8 }
+    .item19 { grid-area:d2x4-7 }
+    .item20 { grid-area:d2x4-8 }
+    .item21 { grid-area:d2x4-9 }
+    .item22 { grid-area:d2x2-9 }
+    .item23 { grid-area:d2x2-a }
+    .item24 { grid-area:d2x2-b }
+
+@media (min-width: 1025px){
+    .container{
+        max-width: 1180px !important;
+    }
+    .div3,
+    .div4,
+    .div7,
+    .div9,
+    .div11,
+    .div15,
+    .div17,
+    .div18,
+    .div22,
+    .div23,
+    .div24{
+        box-sizing: border-box;
+        width: 228px;
+        height: 228px;
+    }
+    .div1,
+    .div2,
+    .div10,
+    .div12,
+    .div13,
+    .div16,
+    .div19,
+    .div20,
+    .div21{
+        box-sizing: border-box;
+        width: 456px;
+        height: 228px;
+    }
+    .div5,
+    .div6,
+    .div8,
+    .div14{
+        box-sizing: border-box;
+        width: 456px;
+        height: 456px;
+    }
+
+    .grid-container {
+        box-sizing: border-box;
+        display: grid;
+        max-width: 1140px;
+        grid-template-areas:
+            'd2x4-1 d2x4-1 d2x4-2 d2x4-2 d2x2-1'
+            'd2x2-2 d4x4-1 d4x4-1 d4x4-2 d4x4-2'
+            'd2x2-3 d4x4-1 d4x4-1 d4x4-2 d4x4-2'
+            'd4x4-3 d4x4-3 d2x2-4 d2x4-3 d2x4-3'
+            'd4x4-3 d4x4-3 d2x2-5 d2x4-4 d2x4-4'
+            'd2x4-5 d2x4-5 d4x4-4 d4x4-4 d2x2-6'
+            'd2x4-6 d2x4-6 d4x4-4 d4x4-4 d2x2-7'
+            'd2x2-8 d2x4-7 d2x4-7 d2x4-8 d2x4-8'
+            'd2x4-9 d2x4-9 d2x2-9 d2x2-a d2x2-b';
+    }
+
+    .grid-container > div {
+        font-size: 30px;
+        padding: 0;
+        margin: 0;
+    }
+    .grid-container{
+        margin: 70px auto;
+    }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+    .grid-container{
+        display: grid;
+        grid-template-areas:
+            'd2x4-1 d2x4-1 d2x4-2 d2x4-2 d2x2-1 d2x2-1'
+            'd2x2-2 d2x2-2 d4x4-1 d4x4-1 d4x4-2 d4x4-2'
+            'd2x2-3 d2x2-3 d4x4-3 d4x4-3 d2x2-4 d2x2-4'
+            'd2x4-3 d2x4-3 d2x2-5 d2x2-5 d2x4-4 d2x4-4'
+            'd2x4-5 d2x4-5 d4x4-4 d4x4-4 d2x2-6 d2x2-6'
+            'd2x4-6 d2x4-6 d2x2-7 d2x2-7 d2x2-8 d2x2-8'
+            'd2x4-7 d2x4-7 d2x4-8 d2x4-8 d2x4-9 d2x4-9 '
+            'd2x2-9 d2x2-9 d2x2-a d2x2-a d2x2-b d2x2-b';
+        margin: auto;
+        
+    }
+    .grid-container > div{
+        font-size: 18pt;
+        width: 100%;
+        height: 200px;
+    }
+    
+    .grid-container{
+        margin: 70px auto;
+    }
+}
+@media (min-width: 481px) and (max-width: 767px) {
+
+    .grid-container{
+        display: grid;
+        grid-template-areas:
+            'd2x4-1 d2x4-1 d2x4-2 d2x4-2'
+            'd2x2-1 d2x2-1 d2x2-2 d2x2-2'
+            'd4x4-1 d4x4-1 d4x4-2 d4x4-2'
+            'd2x2-3 d2x2-3 d4x4-3 d4x4-3'
+            'd2x2-4 d2x2-4 d2x4-3 d2x4-3'
+            'd2x2-5 d2x2-5 d2x4-4 d2x4-4'
+            'd2x4-5 d2x4-5 d4x4-4 d4x4-4'
+            'd2x2-6 d2x2-6 d2x4-6 d2x4-6'
+            'd2x2-7 d2x2-7 d2x2-8 d2x2-8'
+            'd2x4-7 d2x4-7 d2x4-8 d2x4-8'
+            'd2x4-9 d2x4-9 d2x2-9 d2x2-9'
+            'd2x2-a d2x2-a d2x2-b d2x2-b';
+        margin: auto;
+    }
+    .grid-container > div{
+        font-size: 18pt;
+        width: 100%;
+        height: 300px;
+    }
+    
+    .grid-container{
+        margin: 70px auto;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .grid-container{
+        display: grid;
+        grid-template-areas:
+            'd2x4-1 d2x4-1'
+            'd2x4-2 d2x4-2'
+            'd2x2-1 d2x2-1'
+            'd2x2-2 d2x2-2'
+            'd4x4-1 d4x4-1'
+            'd4x4-2 d4x4-2'
+            'd2x2-3 d2x2-3'
+            'd4x4-3 d4x4-3'
+            'd2x2-4 d2x2-4'
+            'd2x4-3 d2x4-3'
+            'd2x2-5 d2x2-5'
+            'd2x4-4 d2x4-4'
+            'd2x4-5 d2x4-5'
+            'd4x4-4 d4x4-4'
+            'd2x2-6 d2x2-6'
+            'd2x4-6 d2x4-6'
+            'd2x2-7 d2x2-7'
+            'd2x2-8 d2x2-8'
+            'd2x4-7 d2x4-7'
+            'd2x4-8 d2x4-8'
+            'd2x4-9 d2x4-9'
+            'd2x2-9 d2x2-9'
+            'd2x2-a d2x2-a'
+            'd2x2-b d2x2-b';
+        margin: auto;
+    }
+    .grid-container > div{
+        font-size: 18pt;
+        width: 100%;
+        height: 400px;
+    }
+}

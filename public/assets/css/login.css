@@ -1,0 +1,29 @@
+body{
+   background-color: #ff555f;
+}
+.login-page{
+    background-color: #020326;
+}
+.login-box{
+    background-color: transparent;
+}
+.login-logo a{
+    color: #fff;
+}
+.login-card-body {
+    background-color: transparent;
+}
+.login-card-body p{
+    color: #fff;
+}
+.card{
+    background-color: transparent;
+}
+.btn{
+    background-color: transparent;
+    color: #fff;
+    border: 1px solid #3333ff;
+}
+span{
+    color: #fff
+}
