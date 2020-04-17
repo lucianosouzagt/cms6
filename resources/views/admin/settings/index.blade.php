@@ -66,9 +66,9 @@
                     </div>
                 </div>
                 <div class="form-group row">       
-                    <label for="subtitle" class="ml-5 col-sm-2 col-form-label">Sobre a Empresa</label>
+                    <label for="about" class="ml-5 col-sm-2 col-form-label">Sobre a Empresa</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="subtitle" id="subtitle" value="{{$settings['about']}}">
+                        <input type="text" class="form-control" name="about" id="about" value="{{$settings['about']}}">
                     </div>
                 </div> 
                 <div class="form-group row">
@@ -110,7 +110,7 @@
                     </div>
                 </div>      
                 <button type="submit" class="ml-5 mt-4 btn btn-success">Salvar</button>
-                <a href="{{route('users.index')}}" class="btn btn-default float-right">Cancelar</a>
+                <a href="{{route('settings')}}" class="btn btn-default float-right">Cancelar</a>
             </form>
         </div>
     </div>
@@ -137,6 +137,7 @@
                 <form action="{{route('settings.save')}}" method="POST"class="mt-3 form-horizontal" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    
                     <div class="form-group row">
                         <label class="ml-5 col-sm-2 col-form-label" for="logo">Logo</label>
                         <div class="col-sm-6">
@@ -174,7 +175,7 @@
                         </div>
                     </div>
                     <button type="submit" class="ml-5 mt-4 btn btn-success">Salvar</button>
-                    <a href="{{route('users.index')}}" class="btn btn-default float-right">Cancelar</a>
+                    <a href="{{route('settings')}}" class="btn btn-default float-right">Cancelar</a>
                 </form>
             </div>
         </div>
@@ -238,7 +239,7 @@
                     </div>
                           
                     <button type="submit" class="ml-5 mt-4 btn btn-success">Salvar</button>
-                    <a href="{{route('users.index')}}" class="btn btn-default float-right">Cancelar</a>
+                    <a href="{{route('settings')}}" class="btn btn-default float-right">Cancelar</a>
                 </form>
             </div>
         </div>

@@ -44,62 +44,74 @@ class SettingController extends Controller
     }
     public function save(Request $request){
         
-        $data = $request->all();
-
-        dd($data);
-
-        if(!empty($data['logo'])){
+        $data = $request->only([
+            'title',
+            'about',
+            'email',
+            'telefone',
+            'address',
+            'district',
+            'zipcode',
+            'city',
+            'state',
+            'facebook',
+            'instagram',
+            'linkedin',
+            'googleplus',
+            'pinterest',
+            'whatsapp'
+        ]);
+        $logo = $request->file('logo');
+        $banner = $request->file('banner');
+        $bannerMobile = $request->file('bannerMobile');
+        $footer = $request->file('footer');
+        
+        if(!empty($logo)){
+            $dblogo = Setting::find(19);
             if($request->logo->isValid()){
-                $imageName = date('YmdHms') . '.' . $request->logo->extension();
-                $dbImage = "media/images/$imageName";
-                $request->logo->move(public_path('media/images'), $imageName);
-                /* $request->image->storeAs('image', $imageName); */
-                Setting::where('name','logo')->update([
-                    'content'=>$dbImage
-                ]);
+                $ext = $request->logo->extension();
+                $imageName = 'logo'.date('His') . '.' . $ext;
+                $dbImage = "media/images/site/$imageName";
+                $request->logo->move(public_path('media/images/site'), $imageName);
+               // dd($request->logo->storeAs('site', $imageName));
+                
+                $dblogo->content = $dbImage;
+                $dblogo->save();
             }            
         }
-        if(!empty($data['banner'])){
+        if(!empty($banner)){
+            $dbBanner = Setting::find(20);
             if($request->banner->isValid()){
-                $imageName = date('YmdHms') . '.' . $request->banner->extension();
+                $imageName = 'banner'.date('His') . '.' . $request->banner->extension();
                 $dbImage = "media/images/$imageName";
                 $request->banner->move(public_path('media/images'), $imageName);
                 /* $request->image->storeAs('image', $imageName); */
-                Setting::where('name','banner')->update([
-                    'content'=>$dbImage
-                ]);
+                $dbBanner->content = $dbImage;
+                $dbBanner->save();
             }            
         }
-        if(!empty($data['bannerMobile'])){
+        if(!empty($bannerMobile)){
+            $dbBannerMobile = Setting::find(21);
             if($request->bannerMobile->isValid()){
-                $imageName = date('YmdHms') . '.' . $request->bannerMobile->extension();
+                $imageName = 'mobile'.date('His') . '.' . $request->bannerMobile->extension();
                 $dbImage = "media/images/$imageName";
                 $request->bannerMobile->move(public_path('media/images'), $imageName);
                 /* $request->image->storeAs('image', $imageName); */
-                Setting::where('name','bannerMobile')->update([
-                    'content'=>$dbImage
-                ]);
+                $dbBannerMobile->content = $dbImage;
+                $dbBannerMobile->save();
             }            
         }
-        if(!empty($data['footer'])){
+        if(!empty($footer)){
+            $dbFooter = Setting::find(22);
             if($request->footer->isValid()){
-                $imageName = date('YmdHms') . '.' . $request->footer->extension();
+                $imageName = 'footer'.date('His') . '.' . $request->footer->extension();
                 $dbImage = "media/images/$imageName";
                 $request->footer->move(public_path('media/images'), $imageName);
                 /* $request->image->storeAs('image', $imageName); */
-                Setting::where('name','footer')->update([
-                    'content'=>$dbImage
-                ]);
+                $dbFooter->content = $dbImage;
+                $dbFooter->save();
             }            
         }
-
-
-        /* $validator = $this->validator($data);
-
-        if($validator->fails()){
-            return redirect()->route('settings')
-            ->withErrors($validator);
-        } */
 
         foreach($data as $item =>$value){
             Setting::where('name',$item)->update([
@@ -121,5 +133,57 @@ class SettingController extends Controller
             
 
         ]);
+    }
+    public function update(Request $request, $id)
+    {
+        $blog = Blog::find($id);
+         
+        
+        if($blog){
+            $data = $request->only([
+                'lang',
+                'news',
+                'title',
+                'body',
+                'image'
+            ]);
+
+            $data['new'] = intval($data['news']);
+           
+            $blog->news = $data['new'];
+            
+            $validator = Validator::make([
+                'title'=>$data['title'],
+            ],[
+                'title'=>['required','string','max:100']
+            ]);
+            
+            if(!empty($data['image'])){
+                if($request->image->isValid()){
+                    $imageName = date('YmdHms') . '.' . $request->image->extension();
+                    $dbImage = "media/images/$imageName";
+                    $request->image->move(public_path('media/images'), $imageName);
+                    /* $request->image->storeAs('image', $imageName); */
+                    $blog->image = $dbImage;
+                }else{
+                    $validator->errors()->add('image','Arquivo invalido');
+                }
+                
+            }
+
+            $blog->lang = $data['lang'];
+            $blog->title = $data['title'];
+            $blog->content = $data['body'];
+            
+
+            if(count($validator->errors())>0){
+                return redirect()->route('blog.edit',[
+                    'blog'=>$id
+                ])->withErrors($validator);
+            }
+
+           $blog->save(); 
+        }
+        return redirect()->route('blog.index');
     }
 }

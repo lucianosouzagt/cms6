@@ -229,33 +229,23 @@ return [
             'icon'        => 'fas fa-fw fa-blog',
         ],
         ['header' => 'Site'],
-        [
-            'text' => 'Banner',
-            'url'  => 'painel/service',
-            'icon' => 'far fa-fw fa-file',
-        ],
-        [
+               [
             'text' => 'Serviços',
             'url'  => 'painel/service',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-tools',
         ],
         [
             'text' => 'Clientes',
             'url'  => 'painel/client',
-            'icon' => 'far fa-fw fa-file',
+            'icon' => 'fas fa-fw fa-users',
         ],
-       /*  [
-            'text' => 'Minhas Páginas',
-            'url'  => 'painel/pages',
-            'icon' => 'far fa-fw fa-file',
-        ], */
+        [
+            'text' => 'Informações Gerais',
+            'url'  => 'painel/settings',
+            'icon' => 'fas fa-fw fa-info',
+        ],
         
         ['header' => 'Configurações'],
-        [
-            'text' => 'Configurações do Site',
-            'url'  => 'painel/settings',
-            'icon' => 'fas fa-fw fa-cog',
-        ],
         [
             'text'        => 'Usuários',
             'url'         => 'painel/users',
