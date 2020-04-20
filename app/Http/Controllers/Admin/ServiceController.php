@@ -23,7 +23,7 @@ class ServiceController extends Controller
         if(($request->input('id'))&&($request->input('ordination'))){
             $servi = $request->all();
             $serv = Service::find($servi['id']);
-            $old = Service::where('ordination',$servi['ordination'])->get();
+            $old = Service::where('ordination',$servi['ordination'])->where('lang',$langs)->update(['ordination'=>$serv['ordination']]);
             $serv->ordination = $servi['ordination'];
             $serv->save();
 
@@ -74,6 +74,7 @@ class ServiceController extends Controller
         $data = $request->only([
             'lang',
             'status',
+            'ordination',
             'imageHeader',
             'imageBody',
             'title',
@@ -81,18 +82,24 @@ class ServiceController extends Controller
             'bgcolor',
             'textcolor'
         ]);
-        if($request->image->isValid()){
-            $imageName = 'header'.date('His') . '.' . $request->image->extension();
-            $dbImage = "media/images/$imageName";
-            $request->image->move(public_path('media/images'), $imageName);
-            /* $request->image->storeAs('image', $imageName); */
+        if($request->file('image')){
+            if($request->image->isValid()){
+                $imageName = 'header'.date('His') . '.' . $request->image->extension();
+                $dbImage = "media/images/$imageName";
+                $request->image->move(public_path('media/images'), $imageName);
+                /* $request->image->storeAs('image', $imageName); */
+                $service->imageHeader = $dbImage;
+            }
         }
-        if($request->imageBody->isValid()){
-            $imageName = 'body'.date('His') . '.' . $request->imageBody->extension();
-            $dbImage1 = "media/images/$imageName";
-            $request->imageBody->move(public_path('media/images'), $imageName);
-            /* $request->image->storeAs('image', $imageName); */
-        }
+        if($request->file('imageBody')){
+            if($request->imageBody->isValid()){
+                $imageName = 'body'.date('His') . '.' . $request->imageBody->extension();
+                $dbImage1 = "media/images/$imageName";
+                $request->imageBody->move(public_path('media/images'), $imageName);
+                /* $request->image->storeAs('image', $imageName); */
+                $service->imageBody = $dbImage1;
+            }
+        }   
 
         $validator = Validator::make($data, [
             'title'=>['required','string','max:100'],
@@ -109,8 +116,7 @@ class ServiceController extends Controller
         $service = new Service;
         $service->title = $data['title'];
         $service->status = $data['status'];
-        $service->imageHeader = $dbImage;
-        $service->imageBody = $dbImage1;
+        $service->ordination = $data['ordination'];       
         $service->content = $data['body'];
         $service->lang = $data['lang'];
         $service->bgcolor = $data['bgcolor'];

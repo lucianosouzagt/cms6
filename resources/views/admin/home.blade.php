@@ -8,7 +8,7 @@
 @endsection
 @section('title', 'Painel')
 
-@section('content_header')
+{{-- @section('content_header')
     <div class="row">
         <div class="col-md-6">
             <h1>Dashboard</h1>
@@ -24,15 +24,19 @@
             </form>
         </div>
     </div>
-@endsection
+@endsection --}}
 
 @section('content')
-    <div class="row">
+<div style="height:80vh;" class="d-flex justify-content-center align-items-center">
+    <img width="480" class="img-responsive img-fluid" src="{{asset('assets/images/logo-preto.png')}}" alt="">
+</div>
+
+    {{-- <div class="row">
         <div class="col-md-3 col-sm-6">
             <div class="small-box bg-info">
                 <div class="inner">
                     <h3>{{$visitsCount}}</h3>
-                    <p>Acessos</p>
+                    <p>Clientes</p>
                 </div>
                 <div class="icon">
                     <i class="far fa-fw fa-eye"></i>
@@ -43,7 +47,7 @@
             <div class="small-box bg-success">
                 <div class="inner">
                     <h3>{{$onlineCount}}</h3>
-                    <p>Usuários Online</p>
+                    <p>Serviços</p>
                 </div>
                 <div class="icon">
                     <i class="far fa-fw fa-heart"></i>
@@ -54,7 +58,7 @@
             <div class="small-box bg-warning">
                 <div style="color:#fff;" class="inner">
                     <h3>{{$pageCount}}</h3>
-                    <p>Páginas</p>
+                    <p>Blogs</p>
                 </div>
                 <div class="icon">
                     <i class="far fa-fw fa-file"></i>
@@ -115,5 +119,5 @@
             }
         });
     }
-</script>
+</script> --}}
 @endsection

@@ -59,6 +59,7 @@
             <form action="{{route('settings.save')}}" method="POST"class="mt-3 form-horizontal">
                 @csrf
                 @method('PUT')
+                <input type="hidden" value="{{$settings['lang']}}" name="lang">
                 <div class="form-group row">
                     <label for="clientTitle" class="ml-5 col-sm-2 col-form-label">Titulo Setor Cliente</label>
                     <div class="col-sm-6">

@@ -220,7 +220,7 @@ return [
         [
             'text'        => 'Dashboard',
             'url'         => 'painel',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
         ],
         ['header' => 'Blog'],
         [

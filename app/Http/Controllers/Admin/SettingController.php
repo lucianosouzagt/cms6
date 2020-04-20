@@ -31,6 +31,7 @@ class SettingController extends Controller
             $networks[$dbnetwork['name']] = $dbnetwork['url'];
         }
 
+        $settings['lang'] = $lang;
         foreach($dbsettings as $dbsetting){
             $settings[$dbsetting['name']] = $dbsetting['content'];
         }
@@ -49,6 +50,7 @@ class SettingController extends Controller
         $data = $request->only([
             'clientTitle',
             'about',
+            'lang',
             'email',
             'telefone',
             'maps',
@@ -65,7 +67,6 @@ class SettingController extends Controller
             'pinterest',
             'whatsapp'          
         ]);        
-    
         if($request->input('youtube')){
             if($data['youtube'] == null){
                 $data['youtube'] = '';
@@ -167,7 +168,7 @@ class SettingController extends Controller
                 $dbFooterMobile->save();
             }            
         }
-
+        $lang = $data['lang'];
         foreach($data as $item =>$value){
             Setting::where('name',$item)->where('lang',$lang)->update([
                 'content'=>$value
