@@ -60,9 +60,9 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                    <label for="title" class="ml-5 col-sm-2 col-form-label">Titulo Setor Cliente</label>
+                    <label for="clientTitle" class="ml-5 col-sm-2 col-form-label">Titulo Setor Cliente</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="title" id="titel" value="{{$settings['clientTitle']}}" placeholder="Exemplo: Titulo do Site">
+                        <input type="text" class="form-control" name="clientTitle" id="clientTitle" value="{{$settings['clientTitle']}}" placeholder="Exemplo: Titulo do Site">
                     </div>
                 </div>
                 <div class="form-group row">       
@@ -81,6 +81,12 @@
                     <label for="telefone" class="ml-5 col-sm-2 col-form-label">Telefone de Contato</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control"name="telefone" id="telefone" value="{{$settings['telefone']}}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="maps" class="ml-5 col-sm-2 col-form-label">URL Google Maps</label>
+                    <div class="col-sm-6">
+                        <input type="text" class="form-control" name="maps" id="maps" value="{{$settings['maps']}}">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -174,6 +180,15 @@
                             <img style="max-width:100px; max-height:100px" class="img-responsive "style=""src="{!!asset($images['footer'])!!}">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label class="ml-5 col-sm-2 col-form-label" for="footerMobile">Rodapé Mobile</label>
+                        <div class="col-sm-6">
+                            <input type="file" class="uploadImage form-control-file" name="footerMobile" id="footerMobile">
+                        </div>
+                        <div class="col-sm-3">
+                            <img style="max-width:100px; max-height:100px" class="img-responsive "style=""src="{!!asset($images['footerMobile'])!!}">
+                        </div>
+                    </div>
                     <button type="submit" class="ml-5 mt-4 btn btn-success">Salvar</button>
                     <a href="{{route('settings')}}" class="btn btn-default float-right">Cancelar</a>
                 </form>
@@ -202,9 +217,15 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group row">
+                        <label for="youtube" class="ml-5 col-sm-2 col-form-label">Youtube</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" name="youtube" id="youtube" value="{{$networks['youtube']}}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="facebook" class="ml-5 col-sm-2 col-form-label">Facebook</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" name="facebook" id="titel" value="{{$networks['facebook']}}">
+                            <input type="text" class="form-control" name="facebook" id="facebook" value="{{$networks['facebook']}}">
                         </div>
                     </div>
                     <div class="form-group row">       

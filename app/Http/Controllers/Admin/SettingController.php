@@ -44,27 +44,71 @@ class SettingController extends Controller
     }
     public function save(Request $request){
         
+        $lang = $request->input('lang', 'pt-br');
+
         $data = $request->only([
-            'title',
+            'clientTitle',
             'about',
             'email',
             'telefone',
+            'maps',
             'address',
             'district',
             'zipcode',
             'city',
             'state',
+            `youtube`,
             'facebook',
             'instagram',
             'linkedin',
             'googleplus',
             'pinterest',
-            'whatsapp'
-        ]);
+            'whatsapp'          
+        ]);        
+    
+        if($request->input('youtube')){
+            if($data['youtube'] == null){
+                $data['youtube'] = '';
+            }
+        }
+        if($request->input('facebbook')){
+            if($data['facebook'] === null){
+                $data['facebook'] = '';
+            }
+        }
+        if($request->input('instagram')){
+            if($data['instagram'] === null){
+                $data['instagram'] = '';
+            }
+        }
+        if($request->input('linkedin')){
+            if($data['linkedin'] === null){
+                $data['linkedin'] = '';
+            }
+        }
+        if($request->input('googleplus')){
+            if($data['googleplus'] === null){
+                $data['googleplus'] = '';
+            }
+        }
+        if($request->input('pinterest')){
+            if($data['pinterest'] === null){
+                $data['pinterest'] = '';
+            }
+        }
+        if($request->input('whatsapp')){
+            if($data['whatsapp'] === null){
+                $data['whatsapp'] = '';
+            }
+        }
+     
+        
         $logo = $request->file('logo');
         $banner = $request->file('banner');
         $bannerMobile = $request->file('bannerMobile');
         $footer = $request->file('footer');
+        $footerMobile = $request->file('footerMobile');
+        
         
         if(!empty($logo)){
             $dblogo = Setting::find(19);
@@ -112,9 +156,20 @@ class SettingController extends Controller
                 $dbFooter->save();
             }            
         }
+        if(!empty($footerMobile)){
+            $dbFooterMobile = Setting::find(25);
+            if($request->footerMobile->isValid()){
+                $imageName = 'footerMobile'.date('His') . '.' . $request->footerMobile->extension();
+                $dbImage = "media/images/$imageName";
+                $request->footerMobile->move(public_path('media/images'), $imageName);
+                /* $request->image->storeAs('image', $imageName); */
+                $dbFooterMobile->content = $dbImage;
+                $dbFooterMobile->save();
+            }            
+        }
 
         foreach($data as $item =>$value){
-            Setting::where('name',$item)->update([
+            Setting::where('name',$item)->where('lang',$lang)->update([
                 'content'=>$value
             ]);
         } 
@@ -134,56 +189,5 @@ class SettingController extends Controller
 
         ]);
     }
-    public function update(Request $request, $id)
-    {
-        $blog = Blog::find($id);
-         
-        
-        if($blog){
-            $data = $request->only([
-                'lang',
-                'news',
-                'title',
-                'body',
-                'image'
-            ]);
-
-            $data['new'] = intval($data['news']);
-           
-            $blog->news = $data['new'];
-            
-            $validator = Validator::make([
-                'title'=>$data['title'],
-            ],[
-                'title'=>['required','string','max:100']
-            ]);
-            
-            if(!empty($data['image'])){
-                if($request->image->isValid()){
-                    $imageName = date('YmdHms') . '.' . $request->image->extension();
-                    $dbImage = "media/images/$imageName";
-                    $request->image->move(public_path('media/images'), $imageName);
-                    /* $request->image->storeAs('image', $imageName); */
-                    $blog->image = $dbImage;
-                }else{
-                    $validator->errors()->add('image','Arquivo invalido');
-                }
-                
-            }
-
-            $blog->lang = $data['lang'];
-            $blog->title = $data['title'];
-            $blog->content = $data['body'];
-            
-
-            if(count($validator->errors())>0){
-                return redirect()->route('blog.edit',[
-                    'blog'=>$id
-                ])->withErrors($validator);
-            }
-
-           $blog->save(); 
-        }
-        return redirect()->route('blog.index');
-    }
+   
 }

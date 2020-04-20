@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{!!asset('assets/css/bootstrap.min.css')!!}">
     <link rel="stylesheet" href="{!!asset('assets/css/font-awesome.min.css')!!}">
+    <link rel="stylesheet" href="{!!asset('assets/css/fontawesome.min.css')!!}">
     <link rel="stylesheet" href="{!!asset('assets/css/template.css')!!}">
     <link rel="stylesheet" href="{!!asset('assets/css/services.css')!!}">
     <link rel="stylesheet" href="{!!asset('assets/css/style.css')!!}">
@@ -34,15 +35,10 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Navegação Toggle">
             <i class="fa fa-bars"></i>
             <div class="menu-area">
-                <ul>
-                    @foreach ($networks as $network)
-                    <li class="py-3"><a href="{!!$network->url!!}" target="_blank">{!!$network->icon!!}</i></a></li>
-                    @endforeach
-                </ul>
                 <ul class="media2">
-                    <li><a href="/"><i class="fas fa-home"></i>&nbsp;Home</a></li>
-                    <li><a href="/blog"><i class="fas fa-blog"></i>&nbsp;Blog</a></li>
-                    <li><a href="https://wa.me/5522992921877" target="_blank"><i class="fab fa-whatsapp"></i>&nbsp;WhatsApp</i></a></li>
+                    <li><a href="/"><i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;Home</a></li>
+                    <li><a href="/blog"><i class="fas fa-blog"></i>&nbsp;&nbsp;&nbsp;Blog</a></li>
+                    <li><a href="https://wa.me/5522992921877" target="_blank"><i class="fab fa-whatsapp"></i>&nbsp;&nbsp;&nbsp;WhatsApp</i></a></li>
                 </ul> 
             </div>
         </button>
@@ -59,16 +55,20 @@
 
 {{-------------------------------- BANNER ---------------------------------}}
 <div class="banner">
-    <img src="{!!asset($images['banner'])!!}" alt="banner">
+    <picture>
+        <source media="(max-width: 465px)" srcset="{!!asset($images['bannerMobile'])!!}">
+        <img src="{!!asset($images['banner'])!!}" alt="banner">
+    </picture>    
 </div>
 {{-------------------------------- /BANNER ---------------------------------}}
 
 {{-------------------------------- SOBRE MIM ---------------------------------}}
-<div class="about">
+<div class="about ">
     <p>{!!$settings['about']!!}</p>
        <br>
        <a href=""><i class="far fa-arrow-alt-circle-right"></i>&nbsp;{!!$settings['more']!!}</a>
-       <hr>
+       
+       <hr class="my-4">
 </div>
 {{-------------------------------- /SOBRE MIM ---------------------------------}}
 
@@ -83,18 +83,18 @@
         </ol>
         <div class="carousel-inner">
             @foreach ($news as $new)
-                <div class="row carousel-item {{$new->item == 0 ?'active':''}} linkModal" data-toggle="modal" data-target="#myModal{{$new->item}}">
+                <div style="white-space: normal" class="row carousel-item {{$new->item == 0 ?'active':''}} linkModal" data-toggle="modal" data-target="#myModal{{$new->item}}">
                     <div class="col-sm-6">
-                        <div class="captions">
-                            <div style="width: 400px !important;" class="captions-item">
+                        <div style="position: relative;" class="captions">
+                            <div style="width: 380px !important; position: absolute;" class="captions-item">
                                 <h1><strong>{{$new->title}}</strong></h1>
                                 <p class="ml-3">{{$new->description}}</p><br>
-                                <a style="font-size:14pt" href=""><i class="far fa-arrow-alt-circle-right"></i>&nbsp;{!!$settings['more']!!}</a>
+                                <a style="" href=""><i class="far fa-arrow-alt-circle-right"></i>&nbsp;{!!$settings['more']!!}</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <img src="{{$new->image}}" width="500" class="img-fluid d-block float-right"alt="">   
+                        <img src="{{$new->image}}" class=" news-img img-responsive float-right"alt="">   
                     </div>
                 </div>
             @endforeach
@@ -146,20 +146,26 @@
 <div class="container">
     <div class="grid-container">
         @foreach ($services as $service)
-            <div style="background-color:{{$service->bgcolor}}; color:{{$service->textcolor}} " class="div{{$service->item}} item{{$service->item}} linkModal" data-toggle="modal" data-target="#myModal{{$service->item}}">
-                    <h3>{{$service->title}}</h3>
-                    <h4>{{$service->subtitle}}</h4>
+            <div style="background-color:{{$service->bgcolor}}; color:{{$service->textcolor}};" class="zoom div{{$service->item}} item{{$service->item}} linkModal" data-toggle="modal" data-target="#myModalService{{$service->item}}">
+                    <img style="" class="img-responsive" src="{!!asset($service->imageHeader)!!}" alt="">
+                    <h3 class="text-item">{{$service->title}}
+                    <br><span>{{$service->subtitle}}</span></h3>
             </div>
         @endforeach
     </div>
 </div>
 @foreach ($services as $service)
-    <div class="modal fade" id="myModal{{$service->item}}">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal" id="myModalService{{$service->item}}">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-body">
-                    <button style="margin-left:-50px" type="button" class="close" data-dismiss="modal">&times;</button> 
-                    <p class="py-4">{!!$service->content!!}</p>
+                <div class="modal-body row">
+                    <div class="col-sm-6 pl-3">
+                        <img class="img-responsive" src="{!!asset($service->imageBody)!!}" alt="">
+                    </div>
+                    <div class="col-sm-6 p-3">   
+                        <button style="margin-left:-50px" type="button" class="close" data-dismiss="modal">&times;</button> 
+                        <p class="py-4">{!!$service->content!!}</p>
+                    </div>
                 </div> 
             </div>
         </div>
@@ -175,27 +181,6 @@
             @foreach ($clients as $client)
             <li><img class="img-responsive" src="{!!asset($client->image)!!}" alt="{!!$client->name!!}" /></li>
             @endforeach
-            <li><img class="img-responsive" src="assets/images/client/ocyan.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/equinor.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/baker.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/Halliburton.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/expro.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/petrorionew.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/Archer.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/metrorio.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/chevron.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/valaris.jpg" /></li>
-            <li><img class="img-responsive" src="assets/images/client/teekay.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/modec.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/nov.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/petrobras.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/sbm.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/akofs.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/skf.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/starnav.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/bram.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/transocean.png" /></li>
-            <li><img class="img-responsive" src="assets/images/client/weatherford.png" /></li>
         </ul>
     </div>
 </section>
@@ -205,19 +190,20 @@
 <footer>
 {{------------------------------ FOOTER CONTATO ------------------------------}}
     <section class="contact">
-        <div class="container">
-        <img class="img-responsive float-right" style="max-height: 287px;"src="{!!asset($images['footer'])!!}" alt="footer">
+            <picture>
+                <source media="(max-width: 480px)" srcset="{!!asset($images['footerMobile'])!!}">
+                <img class="img-responsive float-right" style="max-height: 100%;"src="{!!asset($images['footer'])!!}" alt="footer">       
+            </picture> 
             <div class="contact-box">
                 <p class="subtitle">Atendimento</p>
                 <a class="links" href="tel:{!!$settings['telefone']!!}"><div class="circle"><i class="phone"></i></div><span>{!!$settings['telefone']!!}</span></a>
                 <a class="links" href="mailto:{!!$settings['email']!!}"><div class="circle"><i class="email"></i></div><span>{!!$settings['email']!!}</span></a>
-                <a class="address-text" href="https://www.google.com.br/maps/place/R.+Jo%C3%A3o+do+Patroc%C3%ADnio,+83+-+Riviera+Fluminense,+Maca%C3%A9+-+RJ,+27937-190/@-22.3979063,-41.7941934,17z/data=!3m1!4b1!4m5!3m4!1s0x9630dd1e37a955:0xb0fbb62f9a02ec3d!8m2!3d-22.3979113!4d-41.7919994" target="_blank">
+                <a class="address-text" href="{!!$settings['maps']!!}" target="_blank">
                     {!!$settings['address']!!} <br />
                     {!!$settings['district']!!}, {!!$settings['city']!!} – {!!$settings['state']!!}<br />
                     CEP: {!!$settings['zipcode']!!}
                 </a>
             </div>
-        </div>
     </section>
 {{----------------------------- /FOOTER CONTATO ------------------------------}}
 

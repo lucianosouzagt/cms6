@@ -13,7 +13,7 @@
     <link rel="icon" href="{!!asset('assets/images/favicon.ico')!!}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
     <script src="https://kit.fontawesome.com/08379a6aba.js" crossorigin="anonymous"></script>
-    <title>Unax</title>
+    <title>@yield('title')</title>
 </head>
 <body>
 <nav class="topo ">

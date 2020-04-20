@@ -70,6 +70,34 @@
                             <option value= 0 >Inativo</option>
                         </select>
                     </div> 
+                    <label class="ml-5 col-sm-2 col-form-label" for="ordination">Ordenação</label>
+                    <div class="col-sm-2">                            
+                        <select style="width:100px" name="ordination" id="ordination" class="form-control">
+                            <option selected="selected"value= 1 >1</option>
+                            <option value= 2 >2</option>
+                            <option value= 3 >3</option>
+                            <option value= 4 >4</option>
+                            <option value= 5 >5</option>
+                            <option value= 6 >6</option>
+                            <option value= 7 >7</option>
+                            <option value= 7 >7</option>
+                            <option value= 8 >8</option>
+                            <option value= 9 >9</option>
+                            <option value= 1 >1</option>
+                            <option value= 10 >10</option>
+                            <option value= 11 >11</option>
+                            <option value= 12 >12</option>
+                            <option value= 13 >13</option>
+                            <option value= 14 >14</option>
+                            <option value= 15 >15</option>
+                            <option value= 16 >16</option>
+                            <option value= 17 >17</option>
+                            <option value= 18 >18</option>
+                            <option value= 19 >19</option>
+                            <option value= 20 >20</option>
+                            <option value= 21 >21</option>
+                        </select>
+                    </div> 
                 </div>
                 <div class="form-group row">
                     <label for="name" class="ml-5 col-sm-2 col-form-label">Cliente</label>
@@ -84,7 +112,7 @@
                     </div>
                 </div>
                 <button type="submit" class="ml-5 mt-2 btn btn-success">Cadastrar</button>
-                <a href="{{route('blog.index')}}" class="btn btn-default float-right">Cancelar</a>
+                <a href="{{route('client.index')}}" class="btn btn-default float-right">Cancelar</a>
             </form>
         </div>
     </div>

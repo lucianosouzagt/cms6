@@ -110,8 +110,9 @@ body{
     background-color: #aaa;
 }
 .carousel-body{
-    width: 80%;
-    margin: 10px 10%;
+    display: block;
+    width: 98%;
+    margin: 5px 5px;
 }
 .captions-item{
     width: 50%;
@@ -125,6 +126,10 @@ body{
 .captions-item h1,
 .captions-item a{
     color: #c32025;
+}
+.captions-item p,
+.captions-item a{
+  font-size: 14px;
 }
 
 /* --- Clients --- */
@@ -231,9 +236,7 @@ body{
 
 /* footer */
 
-ul{
-    
-}
+
 li{
     text-decoration: none;
 
@@ -389,13 +392,37 @@ li{
     .list-blocks .w-480 {
       width: 100%;
     }
+    .carousel-body{
+      display: block;
+      width: 100%;
+      margin: 5px;
+    }
+    .news-img{
+      width: 330px;
+    }
+    .captions-item{
+      margin-top: -15px;
+    }
+    .captions-item h1{
+      font-size: 14pt;
+    }
+    .captions-item p,
+    .captions-item a{
+      font-size: 12px;
+    }
   }
+
   @media only screen and (max-width: 480px) {
     .list-blocks .grid-sizer {
       width: 100%;
     }
     .list-blocks .w-240 {
       width: 100%;
+    }
+    .carousel-body{
+      display: none;
+      width: 100%;
+      margin: 10px 10%;
     }
   }
 
@@ -456,7 +483,25 @@ li{
     .clients ul li {
       width: 48%;
     }
+    .contact{
+      position: relative;
+      height: 480px !important;
+    }
+    .contact picture{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
     
+  }
+  .contact{
+    position: relative;
+    height: 287px;
+  }
+  .contact picture{
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 
 .media{

@@ -66,8 +66,34 @@
                     <label class="ml-5 col-sm-2 col-form-label" for="status">Status</label>
                     <div class="col-sm-2">                            
                         <select style="width:100px" name="status" id="status" class="form-control">
-                            <option selected="selected"value= 1 >Ativo</option>
-                            <option value= 0 >Inativo</option>
+                            <option {{$client->status == 1 ?'selected="selected"':''}} value= 1 >Ativo</option>
+                            <option {{$client->status == 0 ?'selected="selected"':''}} value= 0 >Inativo</option>
+                        </select>
+                    </div> 
+                    <label class="ml-5 col-sm-2 col-form-label" for="ordination">Ordenação</label>
+                    <div class="col-sm-2">                            
+                        <select style="width:100px" name="ordination" id="ordination" class="form-control">
+                            <option {{$client->ordination == 1 ?'selected="selected"':''}} value= 1 >1</option>
+                            <option {{$client->ordination == 2 ?'selected="selected"':''}} value= 2 >2</option>
+                            <option {{$client->ordination == 3 ?'selected="selected"':''}} value= 3 >3</option>
+                            <option {{$client->ordination == 4 ?'selected="selected"':''}} value= 4 >4</option>
+                            <option {{$client->ordination == 5 ?'selected="selected"':''}} value= 5 >5</option>
+                            <option {{$client->ordination == 6 ?'selected="selected"':''}} value= 6 >6</option>
+                            <option {{$client->ordination == 7 ?'selected="selected"':''}} value= 7 >7</option>
+                            <option {{$client->ordination == 8 ?'selected="selected"':''}} value= 8 >8</option>
+                            <option {{$client->ordination == 9 ?'selected="selected"':''}} value= 9 >9</option>
+                            <option {{$client->ordination == 10 ?'selected="selected"':''}} value= 10 >10</option>
+                            <option {{$client->ordination == 11 ?'selected="selected"':''}} value= 11 >11</option>
+                            <option {{$client->ordination == 12 ?'selected="selected"':''}} value= 12 >12</option>
+                            <option {{$client->ordination == 13 ?'selected="selected"':''}} value= 13 >13</option>
+                            <option {{$client->ordination == 14 ?'selected="selected"':''}} value= 14 >14</option>
+                            <option {{$client->ordination == 15 ?'selected="selected"':''}} value= 15 >15</option>
+                            <option {{$client->ordination == 16 ?'selected="selected"':''}} value= 16 >16</option>
+                            <option {{$client->ordination == 17 ?'selected="selected"':''}} value= 17 >17</option>
+                            <option {{$client->ordination == 18 ?'selected="selected"':''}} value= 18 >18</option>
+                            <option {{$client->ordination == 19 ?'selected="selected"':''}} value= 19 >19</option>
+                            <option {{$client->ordination == 20 ?'selected="selected"':''}} value= 20 >20</option>
+                            <option {{$client->ordination == 21 ?'selected="selected"':''}} value= 21 >21</option>
                         </select>
                     </div> 
                 </div>
@@ -84,7 +110,7 @@
                     </div>
                 </div>
                 <button type="submit" class="ml-5 mt-2 btn btn-success">Salvar</button>
-                <a href="{{route('blog.index')}}" class="btn btn-default float-right">Cancelar</a>
+                <a href="{{route('client.index')}}" class="btn btn-default float-right">Cancelar</a>
             </form>
         </div>
     </div>

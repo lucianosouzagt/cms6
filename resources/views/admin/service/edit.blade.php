@@ -63,20 +63,50 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                        <label class="ml-4 col-sm-3 col-form-label" for="lang">Selecione o Idioma </label>
-                        <div class="col-sm-4">
-                            <select style="width:180px" name="lang" id="lang" class="form-control">
+                        <label class="ml-4 col-sm-2 col-form-label" for="lang">Selecione o Idioma </label>
+                        <div class="col-sm-2">
+                            <select style="width:160px" name="lang" id="lang" class="form-control">
                                 <option {{$service->lang == 'en' ?'selected="selected"':''}} value="en">English USA</option>
                                 <option {{$service->lang == 'pt-br' ?'selected="selected"':''}} value="pt-br">Português Brasil</option>
                             </select>
                         </div>
-                        <label class="ml-4 col-sm-2 col-form-label" for="status">Status</label>
+                        <label class="ml-3 col-sm-1 col-form-label" for="status">Status</label>
                         <div class="col-sm-2">                            
                             <select style="width:100px" name="status" id="status" class="form-control">
-                                <option selected="selected"value= 1 >Ativo</option>
-                                <option value= 0 >Inativo</option>
+                                <option {{$service->status == 1 ?'selected="selected"':''}}value= 1 >Ativo</option>
+                                <option {{$service->status == 0 ?'selected="selected"':''}}value= 0 >Inativo</option>
                             </select>
-                        </div>     
+                        </div>
+                        <label class=" col-sm-2 col-form-label" for="ordination">Ordenação</label>
+                    <div class="col-sm-1">                            
+                        <select style="width:80px" name="ordination" id="ordination" class="form-control">
+                            <option {{$service->ordination == 9999 ?'selected="selected"':''}} value= 9999 >0</option>
+                            <option {{$service->ordination == 1 ?'selected="selected"':''}} value= 1 >1</option>
+                            <option {{$service->ordination == 2 ?'selected="selected"':''}} value= 2 >2</option>
+                            <option {{$service->ordination == 3 ?'selected="selected"':''}} value= 3 >3</option>
+                            <option {{$service->ordination == 4 ?'selected="selected"':''}} value= 4 >4</option>
+                            <option {{$service->ordination == 5 ?'selected="selected"':''}} value= 5 >5</option>
+                            <option {{$service->ordination == 6 ?'selected="selected"':''}} value= 6 >6</option>
+                            <option {{$service->ordination == 7 ?'selected="selected"':''}} value= 7 >7</option>
+                            <option {{$service->ordination == 8 ?'selected="selected"':''}} value= 8 >8</option>
+                            <option {{$service->ordination == 9 ?'selected="selected"':''}} value= 9 >9</option>
+                            <option {{$service->ordination == 10 ?'selected="selected"':''}} value= 10 >10</option>
+                            <option {{$service->ordination == 11 ?'selected="selected"':''}} value= 11 >11</option>
+                            <option {{$service->ordination == 12 ?'selected="selected"':''}} value= 12 >12</option>
+                            <option {{$service->ordination == 13 ?'selected="selected"':''}} value= 13 >13</option>
+                            <option {{$service->ordination == 14 ?'selected="selected"':''}} value= 14 >14</option>
+                            <option {{$service->ordination == 15 ?'selected="selected"':''}} value= 15 >15</option>
+                            <option {{$service->ordination == 16 ?'selected="selected"':''}} value= 16 >16</option>
+                            <option {{$service->ordination == 17 ?'selected="selected"':''}} value= 17 >17</option>
+                            <option {{$service->ordination == 18 ?'selected="selected"':''}} value= 18 >18</option>
+                            <option {{$service->ordination == 19 ?'selected="selected"':''}} value= 19 >19</option>
+                            <option {{$service->ordination == 20 ?'selected="selected"':''}} value= 20 >20</option>
+                            <option {{$service->ordination == 21 ?'selected="selected"':''}} value= 21 >21</option>
+                            <option {{$service->ordination == 22 ?'selected="selected"':''}} value= 22 >22</option>
+                            <option {{$service->ordination == 23 ?'selected="selected"':''}} value= 23 >23</option>
+                            <option {{$service->ordination == 24 ?'selected="selected"':''}} value= 24 >24</option>
+                        </select>
+                    </div>     
 
                 </div>
                 <div class="form-group row">
@@ -91,9 +121,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="ml-4 col-sm-2 col-form-label" for="image">Imagem</label>
+                    <label class="ml-4 col-sm-2 col-form-label" for="image">Imagem Capa</label>
                     <div class="col-sm-6">
                         <input type="file" class="uploadImage form-control-file" name="image" id="image">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="ml-4 col-sm-2 col-form-label" for="imageBody">Imagem Conteudo</label>
+                    <div class="col-sm-6">
+                        <input type="file" class="uploadImage form-control-file" name="imageBody" id="imageBody">
                     </div>
                 </div>
                 <div class="form-group row">

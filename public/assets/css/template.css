@@ -8337,9 +8337,19 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 0;
+    left: 40px;
     padding: 0 15px;
   }
+  @media only screen and (max-width: 480px) { 
+    .contact .contact-box {
+      max-width: 295px;
+      position: absolute;
+      top: 30%;
+      transform: translateY(-50%);
+      left: 0;
+      padding: 0 15px;
+    }
+  } 
   .contact .subtitle {
     color: #fff;
     margin: 0 0 13px;

@@ -19,11 +19,30 @@ class ServiceController extends Controller
     public function index(Request $request)
     {
         $langs = $request->input('lang', 'pt-br');
-       
+
+        if(($request->input('id'))&&($request->input('ordination'))){
+            $servi = $request->all();
+            $serv = Service::find($servi['id']);
+            $old = Service::where('ordination',$servi['ordination'])->get();
+            $serv->ordination = $servi['ordination'];
+            $serv->save();
+
+        }
+                
+        $i = 1;
+        $servicesPreview = Service::where('lang',$langs)->where('status', 1)->orderBy('ordination','asc')->limit(24)->get();
+        foreach ($servicesPreview as $servicePreview) {
+            
+            $servicePreview['item'] = $i;
+            $i = $i + 1;
+        }
+        $servicesList = Service::where('lang',$langs)->where('status', 1)->orderBy('ordination','asc')->get();
         $services = Service::where('lang',$langs)->orderBy('id', 'desc')->paginate(10);
 
         return view('admin.service.index',[
             'services'=> $services,
+            'servicesPreview'=>$servicesPreview,
+            'servicesList'=>$servicesList,
             'lang'=> $langs
             
         ]);
@@ -55,16 +74,23 @@ class ServiceController extends Controller
         $data = $request->only([
             'lang',
             'status',
-            'image',
+            'imageHeader',
+            'imageBody',
             'title',
             'body',
             'bgcolor',
             'textcolor'
         ]);
         if($request->image->isValid()){
-            $imageName = date('YmdHms') . '.' . $request->image->extension();
+            $imageName = 'header'.date('His') . '.' . $request->image->extension();
             $dbImage = "media/images/$imageName";
             $request->image->move(public_path('media/images'), $imageName);
+            /* $request->image->storeAs('image', $imageName); */
+        }
+        if($request->imageBody->isValid()){
+            $imageName = 'body'.date('His') . '.' . $request->imageBody->extension();
+            $dbImage1 = "media/images/$imageName";
+            $request->imageBody->move(public_path('media/images'), $imageName);
             /* $request->image->storeAs('image', $imageName); */
         }
 
@@ -83,7 +109,8 @@ class ServiceController extends Controller
         $service = new Service;
         $service->title = $data['title'];
         $service->status = $data['status'];
-        $service->image = $dbImage;
+        $service->imageHeader = $dbImage;
+        $service->imageBody = $dbImage1;
         $service->content = $data['body'];
         $service->lang = $data['lang'];
         $service->bgcolor = $data['bgcolor'];
@@ -137,14 +164,16 @@ class ServiceController extends Controller
             $data = $request->only([
                 'lang',
                 'status',
+                'ordination',
                 'title',
                 'subtitle',
                 'bgcolor',
                 'textcolor',
                 'body',
-                'image'
+                'imageHeader',
+                'imageBody'
             ]);
-
+            
             $validator = Validator::make([
                 'title'=>$data['title'],
                 'subtitle'=>$data['subtitle'],
@@ -152,18 +181,30 @@ class ServiceController extends Controller
                 'textcolor'=>$data['textcolor']
             ],[
                 'title'=>['required','string','max:100'],
-                'subtitle'=>['string','max:100'],
+                'subtitle'=>['max:100'],
                 'bgcolor'=>['string', 'regex:/#[A-Z0-9]{6}/i'],
                 'textcolor'=>['string', 'regex:/#[A-Z0-9]{6}/i'],
             ]);
             
             if(!empty($data['image'])){
                 if($request->image->isValid()){
-                    $imageName = date('YmdHms') . '.' . $request->image->extension();
+                    $imageName = 'header'.date('YmdHis') . '.' . $request->image->extension();
                     $dbImage = "media/images/$imageName";
                     $request->image->move(public_path('media/images'), $imageName);
                     /* $request->image->storeAs('image', $imageName); */
-                    $service->image = $dbImage;
+                    $service->imageHeader = $dbImage;
+                }else{
+                    $validator->errors()->add('image','Arquivo invalido');
+                }
+                
+            }
+            if(!empty($data['imageBody'])){
+                if($request->imageBody->isValid()){
+                    $imageNameBody = 'body'.date('YmdHis') . '.' . $request->imageBody->extension();
+                    $dbImageBody = "media/images/$imageNameBody";
+                    $request->imageBody->move(public_path('media/images'), $imageNameBody);
+                    /* $request->image->storeAs('image', $imageName); */
+                    $service->imageBody = $dbImageBody;
                 }else{
                     $validator->errors()->add('image','Arquivo invalido');
                 }
@@ -214,4 +255,5 @@ class ServiceController extends Controller
         }
         return redirect()->route('service.index');
     }
+    
 }

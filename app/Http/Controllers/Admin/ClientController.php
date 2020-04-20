@@ -47,17 +47,19 @@ class ClientController extends Controller
         $data = $request->only([
             'status',
             'name',
-            'image'
+            'image',
+            'ordination'
         ]);
 
         if($request->image->isValid()){
-            $imageName = date('YmdHms') . '.' . $request->image->extension();
+            $imageName = date('YmdHis') . '.' . $request->image->extension();
             $dbImage = "media/images/$imageName";
             $request->image->move(public_path('media/images'), $imageName);
         }
 
         $client = new Client;
         $client->status = $data['status'];
+        $client->ordination = $data['ordination'];
         $client->name = $data['name'];
         $client->image = $dbImage;
         $client->save();
@@ -109,27 +111,28 @@ class ClientController extends Controller
             $data = $request->only([
                 'name',
                 'status',
-                'image'
+                'image',
+                'ordination'
             ]);
             
             if(!empty($data['image'])){
                 if($request->image->isValid()){
-                    $imageName = date('YmdHms') . '.' . $request->image->extension();
+                    $imageName = date('YmdHis') . '.' . $request->image->extension();
                     $dbImage = "media/images/$imageName";
-                    //$request->image->move(public_path('media/images'), $imageName);
-                    $photo = $request->image->storeAs('image', $imageName);
+                    $request->image->move(public_path('media/images'), $imageName);
+                   /*  $photo = $request->image->storeAs('image', $imageName);
                     $path = Storage::path($photo);
                     $newImage = Image::make($path)->resize(100, 100, function($c){
                         $c->aspectRatio();
                         $c->upsize();                       
-                    })->save();
+                    })->save(); */
                     $client->image = $dbImage;
                 }else{
                     $validator->errors()->add('image','Arquivo invalido');
                 }
                 
             }
-
+            $client->ordination = $data['ordination'];
             $client->status = $data['status'];
             $client->name = $data['name'];
             $client->save(); 
@@ -145,6 +148,9 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+            $Client = Client::find($id);
+            $Client->delete();
+
+         return redirect()->route('client.index');
     }
 }

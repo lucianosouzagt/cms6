@@ -12,6 +12,9 @@
 */
 
 Route::get('/','Site\HomeController@index');
+Route::get('teste',function(){
+    return view('site.contaniner');
+});
 
 Route::get('blog','Site\BlogController@index')->name('blog');
 Route::get('site','Site\BlogController@site')->name('site');

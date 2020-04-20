@@ -17,9 +17,9 @@ class HomeController extends Controller
         $i = 1;
         $n = 0;
 
-        $clients = Client::where('status',1)->limit(21)->get();
+        $clients = Client::where('status',1)->orderBy('ordination','asc')->limit(21)->get();
 
-        $services = Service::where('lang',$lang)->where('status', 1)->orderBy('id','desc')->limit(24)->get();
+        $services = Service::where('lang',$lang)->where('status', 1)->orderBy('ordination','asc')->limit(24)->get();
         foreach ($services as $service) {
             
             $service['item'] = $i;

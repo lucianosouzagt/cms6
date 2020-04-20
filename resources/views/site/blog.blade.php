@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+@extends('site.layout')
+
+@section('title','Blog - Unax')
+
+@section('content')
+
+{{-- <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +15,7 @@
     <link rel="stylesheet" href="{!!asset('assets/css/template.css')!!}">
     <link rel="stylesheet" href="{!!asset('assets/css/services.css')!!}">
     <link rel="stylesheet" href="{!!asset('assets/css/style.css')!!}">
-    {{-- <link rel="icon" href="/templates/unaxsite/site/images/favicons/favicon.ico" type="image/x-icon"> --}}
+    {{-- <link rel="icon" href="/templates/unaxsite/site/images/favicons/favicon.ico" type="image/x-icon"> 
     <link rel="icon" href="{!!asset('assets/images/favicon.ico')!!}" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
     <script src="https://kit.fontawesome.com/08379a6aba.js" crossorigin="anonymous"></script>
@@ -31,7 +37,7 @@
                     <li><a href="https://www.instagram.com/unaxoffshore/" target="_blank"><i class="instagram"></i></a></li>
                     <li><a href="https://www.facebook.com/pages/Unax-Offshore/170426359817500" target="_blank"><i class="facebook"></i></a></li>
                     <li><a href="https://www.linkedin.com/company/unax-offshore?trk=tabs_biz_home" target="_blank"><i class="linkedin"></i></a></li>
-                </ul> --}}
+                </ul> 
                 <ul class="media2">
                     <li><a href="/"><i class="fas fa-home"></i>&nbsp;Home</a></li>
                     <li><a href="/blog"><i class="fas fa-blog"></i>&nbsp;Blog</a></li>
@@ -46,14 +52,14 @@
             </select>
         </form>
     </div>
-</nav>
+</nav> --}}
     <div class="container my-4">
           <!-- Button to Open the Modal -->
           @foreach ($blogs as $blog)
               <a class="linkModal" data-toggle="modal" data-target="#myModal{{$blog->id}}">
                   <div class="my-5 row">
                       <div class="p-4 col-sm-5 divImg">
-                          <img class="img-responsive "style=""src="{!!asset($blog->image)!!}">
+                          <img class="img-responsive "style="max-height: 270px"src="{!!asset($blog->image)!!}">
                       </div>
                       <div class="p-4 col-sm-7 divBody">
                           <h2 class="blogTitle mb-5">
@@ -73,7 +79,7 @@
                   <div class="modal-dialog modal-lg">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <img style="margin-left:-12px" class="img-responsive img-rounded"src="{!!asset($blog->image)!!}">                            
+                              <img style="margin-left:-12px;" class="img-responsive img-rounded"src="{!!asset($blog->image)!!}">                            
                               <button style="margin-left:-50px" type="button" class="close" data-dismiss="modal">&times;</button>
                           </div>
                           <div class="modal-body">
@@ -105,9 +111,10 @@
               </div>                     
           @endforeach
     </div>    
-<script type="text/javascript" src="{!!asset('assets/js/jquery.min.js')!!}"></script>
+{{-- <script type="text/javascript" src="{!!asset('assets/js/jquery.min.js')!!}"></script>
 <script type="text/javascript" src="{!!asset('assets/js/bootstrap.bundle.min.js')!!}"></script>
 <script type="text/javascript" src="{!!asset('assets/js/jquery.easing.min.js')!!}"></script>
 <script type="text/script" src="{!!asset('assets/js/script.js')!!}"></script>    
 </body>
-</html>
+</html> --}}
+@endsection
