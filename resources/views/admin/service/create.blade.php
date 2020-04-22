@@ -70,15 +70,15 @@
                             </select>
                         </div>
                         <label class="ml-4 col-sm-1 col-form-label" for="status">Status</label>
-                        <div class="col-sm-2">                            
+                        <div class="col-sm-1">                            
                             <select style="width:100px" name="status" id="status" class="form-control">
                                 <option selected="selected"value= 1 >Ativo</option>
                                 <option value= 0 >Inativo</option>
                             </select>
                         </div> 
-                        <label class=" col-sm-2 col-form-label" for="ordination">Ordenação</label>
-                        <div class="col-sm-1">                            
-                            <select style="width:80px" name="ordination" id="ordination" class="form-control">
+                        <label class="ml-5 col-sm-2 col-form-label" for="ordination">Ordenação</label>
+                        <div class="col-sm-2">                            
+                            <select style="width:85px" name="ordination" id="ordination" class="form-control">
                                 <option selected="selected"value= 9999 >0</option>
                                 <option value= 1 >1</option>
                                 <option value= 2 >2</option>
@@ -111,37 +111,37 @@
 
                 </div>
                 <div class="form-group row">
-                    <label for="bgcolor" class="ml-4 col-sm-3 col-form-label">Cor do Site</label>
+                    <label for="bgcolor" class="ml-4 col-sm-3 col-form-label">Cor do site</label>
                     <div class="col-sm-1">
                         <input type="color" class="form-control" name="bgcolor" id="bgcolor">
                     </div>
-                    <label for="bgcolor" class="ml-4 col-sm-3 col-form-label"></label>
-                    <label for="textcolor" class=" col-sm-2 col-form-label">Cor do Texto</label>
+                    <label for="bgcolor" class=" col-sm-3 col-form-label"></label>
+                    <label for="textcolor" class=" col-sm-2 col-form-label">Cor do texto</label>
                     <div class="col-sm-1">
                         <input type="color" class="form-control"name="textcolor" id="textcolor">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="ml-4 col-sm-2 col-form-label" for="image">Imagem Capa</label>
-                    <div class="col-sm-6">
+                    <label class="ml-4 col-sm-2 col-form-label" for="image">Imagem capa</label>
+                    <div class="col-sm-8">
                         <input type="file" class="uploadImage form-control-file" name="image" id="image">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="ml-4 col-sm-2 col-form-label" for="imageBody">Imagem Conteudo</label>
-                    <div class="col-sm-6">
+                    <label class="ml-4 col-sm-2 col-form-label" for="imageBody">Imagem conteúdo</label>
+                    <div class="col-sm-8">
                         <input type="file" class="uploadImage form-control-file" name="imageBody" id="imageBody">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="title" class="ml-4 col-sm-2 col-form-label">Título</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{old('title')}}" placeholder="Digite o título do serviço">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="subtitle" class="ml-4 col-sm-2 col-form-label">Sub-título</label>
-                    <div class="col-sm-6">
+                    <label for="subtitle" class="ml-4 col-sm-2 col-form-label">Subtítulo</label>
+                    <div class="col-sm-8">
                         <input type="text" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" id="subtitle" value="{{old('title')}}" placeholder="Digite o sub-título do serviço">
                     </div>
                 </div>

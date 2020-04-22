@@ -8,7 +8,9 @@
 @endsection
 
 @section('content_header')
-    <h1>Meu perfil</h1>
+    <div class="">
+        <h1>Meu perfil</h1>
+    </div>
 @endsection
 
 @section('content')
@@ -41,7 +43,7 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group row">
-                    <label for="name" class="ml-5 col-sm-2 col-form-label">Nome Completo</label>
+                    <label for="name" class="ml-5 col-sm-2 col-form-label">Nome completo</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{$user->name}}" placeholder="Digite seu nome completo">
                     </div>
@@ -53,7 +55,7 @@
                     </div>
                 </div> 
                 <div class="form-group row">
-                    <label for="password" class="ml-5 col-sm-2 col-form-label">Nova Senha</label>
+                    <label for="password" class="ml-5 col-sm-2 col-form-label">Nova senha</label>
                     <div class="col-sm-6">
                         <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Digite sua senha">
                     </div>

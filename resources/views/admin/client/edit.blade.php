@@ -49,7 +49,7 @@
     <div class="card">
         <div class="card-header row">
             <div class="col-sm-6">
-                <h3>Editar Clinte do site</h3>
+                <h3>Editar clinte</h3>
             </div>
             <div class="col-sm-6">
                 <form method="get">
@@ -72,7 +72,8 @@
                     </div> 
                     <label class="ml-5 col-sm-2 col-form-label" for="ordination">Ordenação</label>
                     <div class="col-sm-2">                            
-                        <select style="width:100px" name="ordination" id="ordination" class="form-control">
+                        <select style="width:110px" name="ordination" id="ordination" class="form-control">
+                            <option {{$client->ordination == null ?'selected="selected"':''}} value= "" >0</option>
                             <option {{$client->ordination == 1 ?'selected="selected"':''}} value= 1 >1</option>
                             <option {{$client->ordination == 2 ?'selected="selected"':''}} value= 2 >2</option>
                             <option {{$client->ordination == 3 ?'selected="selected"':''}} value= 3 >3</option>

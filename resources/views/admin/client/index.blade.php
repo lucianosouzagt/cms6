@@ -15,7 +15,7 @@
                 <h1>Clientes</h1>
             </div>
             <div class="col-md-6">
-                <a href="{{route('client.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar nova página</a>
+                <a href="{{route('client.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar cliente</a>
             </div>
         </div>
 @endsection
@@ -29,10 +29,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th width="50">ID</th>
+                        <th width="80">ID</th>
                         <th>Cliente</th>
-                        <th>Ordenação</th>
-                        <th width="150">Ações</th>
+                        <th width="50">Ordenação</th>
+                        <th width="100">Ações</th>
                     </tr>
                 </thead>
                <tbody>
@@ -41,8 +41,7 @@
                         <td>{{$client->id}}</td>
                         <td>{{$client->name}}</td>
                         <td>{{$client->ordenation}}</td>
-                    <td><a style="outline: none;text-decoration: none;color: #55ff55;" href=""class="linkModal" data-toggle="modal" data-target="#myModal{{$client->id}}"><i class="far fa-eye"></i></a>
-                        <a style="outline: none;text-decoration: none;color: #5555ff;" href="{{route('client.edit',['client'=>$client->id])}}"><i class="fas fa-edit"></i></a>  
+                    <td><a style="outline: none;text-decoration: none;color: #5555ff;" href="{{route('client.edit',['client'=>$client->id])}}"><i class="fas fa-edit"></i></a>  
                     <form class="d-inline" method="POST" action="{{route('client.destroy',['client'=>$client->id])}}" onsubmit="return confirm('Tem certeza que deseja excluir a página: {{$client->name}}')">
                             @csrf
                             @method('DELETE')

@@ -61,45 +61,37 @@
         <div class="card-body">
             <form action="{{route('blog.store')}}" method="POST"class="mt-3 form-horizontal" enctype="multipart/form-data">
                 @csrf
-                {{-- <div class="form-group row">
-                    <div class="ml-5 custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="news">
-                      <label class="custom-control-label" value="1" for="news">Deseja mostrar esse Blog na Pagina Inicial?</label>
-                    </div>
-                </div> --}}
                 <div class="form-group row">
-                    <label class="ml-5 col-sm-6 col-form-label" for="news">Deseja mostrar esse Blog na Pagina Inicial?</label>
-                    <div class="ml-5 col-sm-2">
-                        <select style="width:100px" name="news" id="news" class="form-control">
+                    <label class="ml-5 col-sm-2 col-form-label" for="lang">Selecione o Idioma </label>
+                    <div class="col-sm-2">
+                        <select style="width:165px" name="lang" id="lang" class="form-control">
+                            <option {{$lang == 'en' ?'selected="selected"':''}} value="en">English USA</option>
+                            <option {{$lang == 'pt-br' ?'selected="selected"':''}} value="pt-br">Português Brasil</option>
+                        </select>
+                    </div>
+                    <label class="ml-5 col-sm-4 col-form-label" for="news">Deseja mostrar esse Blog na Pagina Inicial?</label>
+                    <div class="col-sm-1">
+                        <select style="width:110px" name="news" id="news" class="form-control">
                             <option {{$news == 0 ?'selected="selected"':''}} value=0 >Não</option>
                             <option {{$news == 1 ?'selected="selected"':''}} value=1 >Sim</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="ml-5 col-sm-2 col-form-label" for="lang">Selecione o Idioma </label>
-                    <div class="col-sm-6">
-                        <select style="width:200px" name="lang" id="lang" class="form-control">
-                            <option {{$lang == 'en' ?'selected="selected"':''}} value="en">English USA</option>
-                            <option {{$lang == 'pt-br' ?'selected="selected"':''}} value="pt-br">Português Brasil</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label class="ml-5 col-sm-2 col-form-label" for="image">Imagem</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                         <input type="file" class="uploadImage form-control-file" name="image" id="image">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="title" class="ml-5 col-sm-2 col-form-label">Título</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{old('title')}}" placeholder="Digite o título do blog">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="desc" class="ml-5 col-sm-2 col-form-label">Descrição</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" id="description" value="{{old('title')}}" placeholder="Digite o descrição do blog">
                     </div>
                 </div>

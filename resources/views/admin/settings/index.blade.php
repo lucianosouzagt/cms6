@@ -54,32 +54,32 @@
                     </div>
                 </div>
             @endif
-            <h3>Informações Gerais</h3>
+            <h3>Informações gerais</h3>
             <hr>
             <form action="{{route('settings.save')}}" method="POST"class="mt-3 form-horizontal">
                 @csrf
                 @method('PUT')
                 <input type="hidden" value="{{$settings['lang']}}" name="lang">
                 <div class="form-group row">
-                    <label for="clientTitle" class="ml-5 col-sm-2 col-form-label">Titulo Setor Cliente</label>
+                    <label for="clientTitle" class="ml-5 col-sm-2 col-form-label">Título setor cliente</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="clientTitle" id="clientTitle" value="{{$settings['clientTitle']}}" placeholder="Exemplo: Titulo do Site">
                     </div>
                 </div>
                 <div class="form-group row">       
-                    <label for="about" class="ml-5 col-sm-2 col-form-label">Sobre a Empresa</label>
+                    <label for="about" class="ml-5 col-sm-2 col-form-label">Sobre a empresa</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control" name="about" id="about" value="{{$settings['about']}}">
                     </div>
                 </div> 
                 <div class="form-group row">
-                    <label for="email" class="ml-5 col-sm-2 col-form-label">Email de Contato</label>
+                    <label for="email" class="ml-5 col-sm-2 col-form-label">E-mail de contato</label>
                     <div class="col-sm-6">
                         <input type="email" class="form-control" name="email" id="email" value="{{$settings['email']}}">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="telefone" class="ml-5 col-sm-2 col-form-label">Telefone de Contato</label>
+                    <label for="telefone" class="ml-5 col-sm-2 col-form-label">Telefone de contato</label>
                     <div class="col-sm-6">
                         <input type="text" class="form-control"name="telefone" id="telefone" value="{{$settings['telefone']}}">
                     </div>
@@ -116,7 +116,7 @@
                         <input type="text" class="form-control"name="state" id="state" value="{{$settings['state']}}">
                     </div>
                 </div>      
-                <button type="submit" class="ml-5 mt-4 btn btn-success">Salvar</button>
+                <button type="submit" class="ml-5 btn btn-success">Salvar</button>
                 <a href="{{route('settings')}}" class="btn btn-default float-right">Cancelar</a>
             </form>
         </div>
@@ -164,7 +164,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="ml-5 col-sm-2 col-form-label" for="bannerMobile">Banner Mobile</label>
+                        <label class="ml-5 col-sm-2 col-form-label" for="bannerMobile">Banner mobile</label>
                         <div class="col-sm-6">
                             <input type="file" class="uploadImage form-control-file" name="bannerMobile" id="bannerMobile">
                         </div>
@@ -182,7 +182,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="ml-5 col-sm-2 col-form-label" for="footerMobile">Rodapé Mobile</label>
+                        <label class="ml-5 col-sm-2 col-form-label" for="footerMobile">Rodapé mobile</label>
                         <div class="col-sm-6">
                             <input type="file" class="uploadImage form-control-file" name="footerMobile" id="footerMobile">
                         </div>
@@ -190,7 +190,7 @@
                             <img style="max-width:100px; max-height:100px" class="img-responsive "style=""src="{!!asset($images['footerMobile'])!!}">
                         </div>
                     </div>
-                    <button type="submit" class="ml-5 mt-4 btn btn-success">Salvar</button>
+                    <button type="submit" class="ml-5 btn btn-success">Salvar</button>
                     <a href="{{route('settings')}}" class="btn btn-default float-right">Cancelar</a>
                 </form>
             </div>
@@ -212,7 +212,7 @@
                         </div>
                     </div>
                 @endif
-                <h3>Rede Social</h3>
+                <h3>Redes sociais</h3>
                 <hr>
                 <form action="{{route('settings.save')}}" method="POST"class="mt-3 form-horizontal">
                     @csrf
@@ -259,8 +259,7 @@
                             <input type="text" class="form-control" name="whatsapp" id="whatsapp" value="{{$networks['whatsapp']}}">
                         </div>
                     </div>
-                          
-                    <button type="submit" class="ml-5 mt-4 btn btn-success">Salvar</button>
+                    <button type="submit" class="ml-5 btn btn-success">Salvar</button>
                     <a href="{{route('settings')}}" class="btn btn-default float-right">Cancelar</a>
                 </form>
             </div>

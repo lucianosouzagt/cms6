@@ -49,7 +49,7 @@
     <div class="card">
         <div class="card-header row">
             <div class="col-sm-6">
-                <h3>Cadastro de Clinte para o site</h3>
+                <h3>Cadastro de clinte</h3>
             </div>
             <div class="col-sm-6">
                 <form method="get">
@@ -65,15 +65,16 @@
                 <div class="form-group row">
                     <label class="ml-5 col-sm-2 col-form-label" for="status">Status</label>
                     <div class="col-sm-2">                            
-                        <select style="width:100px" name="status" id="status" class="form-control">
+                        <select style="width:110px" name="status" id="status" class="form-control">
                             <option selected="selected"value= 1 >Ativo</option>
                             <option value= 0 >Inativo</option>
                         </select>
                     </div> 
                     <label class="ml-5 col-sm-2 col-form-label" for="ordination">Ordenação</label>
-                    <div class="col-sm-2">                            
-                        <select style="width:100px" name="ordination" id="ordination" class="form-control">
-                            <option selected="selected"value= 1 >1</option>
+                    <div class="col-sm-1">                            
+                        <select style="width:110px" name="ordination" id="ordination" class="form-control">
+                            <option selected="selected"value= null >0</option>
+                            <option value= 1 >1</option>
                             <option value= 2 >2</option>
                             <option value= 3 >3</option>
                             <option value= 4 >4</option>

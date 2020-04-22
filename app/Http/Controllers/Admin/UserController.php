@@ -53,7 +53,8 @@ class UserController extends Controller
             'name',
             'email',
             'password',
-            'password_confirmation'
+            'password_confirmation',
+            'admin'
         ]);
 
         $validator = Validator::make($data, [
@@ -72,6 +73,7 @@ class UserController extends Controller
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
+        $user->admin = $data['admin'];
         $user->save();
 
         return redirect()->route('users.index');
@@ -120,7 +122,8 @@ class UserController extends Controller
                 'name',
                 'email',
                 'password',
-                'password_confirmation'
+                'password_confirmation',
+                'admin'
             ]);
 
             $validator = Validator::make([
@@ -132,7 +135,7 @@ class UserController extends Controller
             ]);
 
             $user->name = $data['name'];
-
+            $user->admin = $data['admin'];
             if($user->email != $data['email']){
                 $hasEmail = User::where('email', $data['email'])->get();
                 if(count($hasEmail) === 0){

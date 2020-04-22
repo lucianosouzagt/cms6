@@ -11,7 +11,7 @@
 
 @section('content_header')
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h1>Serviços</h1>
             </div>
             <div class="col-md-2">
@@ -22,8 +22,8 @@
                     </select>
                 </form>
             </div>
-            <div class="col-sm-4">
-                <a href="{{route('service.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar novo Serviço</a>
+            <div class="col-sm-2">
+                <a href="{{route('service.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar serviço</a>
             </div>
         </div>
 @endsection
@@ -32,17 +32,17 @@
 
 @section('content')
 
-<ul class="nav nav-tabs col-12" id="custom-content-above-tab" role="tablist">
+<ul class="nav nav-tabs col-12" id="custom-content-above-tab" role="tablist">    
     <li class="nav-item">
-      <a class="nav-link active" id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Ordenação</a>
-    </li>    
+        <a class="nav-link active" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Serviços</a>
+    </li>
     <li class="nav-item">
-        <a class="nav-link" id="custom-content-above-home-tab" data-toggle="pill" href="#custom-content-above-home" role="tab" aria-controls="custom-content-above-home" aria-selected="true">Serviços</a>
+        <a class="nav-link " id="custom-content-above-profile-tab" data-toggle="pill" href="#custom-content-above-profile" role="tab" aria-controls="custom-content-above-profile" aria-selected="false">Ordenação</a>
     </li>
 </ul>
 
 <div class="tab-content" id="custom-content-above-tabContent">
-    <div class="mt-3 tab-pane fade" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
+    <div class="mt-3 tab-pane fade active show" id="custom-content-above-home" role="tabpanel" aria-labelledby="custom-content-above-home-tab">
         <div class="card">
             <div class="card-body">
                 <table class="table table-hover">
@@ -52,7 +52,6 @@
                             <th>Título</th>
                             <th>Ordenação</th>
                             <th width="100">Idioma</th>
-                            <th style="text-align:center" width="100">Visível</th>
                             <th width="100">Ações</th>
                         </tr>
                     </thead>
@@ -65,13 +64,12 @@
                             <td>{{$service->lang}}</td>
                             <td style="text-align:center">
                                 @if($service->status == 1)
-                                <a style="outline: none;text-decoration: none;color: #777777;" href="{{route('service.done',['id'=>$service->id])}}"><i style="font-size: 16pt;"class="far fa-eye"></i></a>
+                                <a style="outline: none;text-decoration: none;color: #777777;" href="{{route('service.done',['id'=>$service->id])}}"><i class="far fa-eye"></i></a>
                                 @else
-                                <a style="outline: none;text-decoration: none;color: #666666;" href="{{route('service.done',['id'=>$service->id])}}"><i style="font-size: 16pt;" class="far fa-eye-slash"></i></a> 
+                                <a style="outline: none;text-decoration: none;color: #666666;" href="{{route('service.done',['id'=>$service->id])}}"><i class="far fa-eye-slash"></i></a> 
                                 @endif
-                            </td>
-                        <td><a style="outline: none;text-decoration: none;color: #5555ff;" href="{{route('service.edit',['service'=>$service->id])}}"><i class="fas fa-edit"></i></a>  
-                        <form class="d-inline" method="POST" action="{{route('service.destroy',['service'=>$service->id])}}" onsubmit="return confirm('Tem certeza que deseja excluir a página: {{$service->title}}')">
+                            <a style="outline: none;text-decoration: none;color: #5555ff;" href="{{route('service.edit',['service'=>$service->id])}}"><i class="fas fa-edit"></i></a>  
+                            <form class="d-inline" method="POST" action="{{route('service.destroy',['service'=>$service->id])}}" onsubmit="return confirm('Tem certeza que deseja excluir a página: {{$service->title}}')">
                                 @csrf
                                 @method('DELETE')
                             
@@ -89,18 +87,20 @@
     </div>
 
 
-<div class="mt-3 tab-pane fade active show" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
+<div class="mt-3 tab-pane fade" id="custom-content-above-profile" role="tabpanel" aria-labelledby="custom-content-above-profile-tab">
     <div class="card">
         <div class="card-body row">
             <div class="container col-sm-5">
                 <div class="grid-container">
                     @foreach ($servicesPreview as $servicePreview)
-                        <div style="background-color:{{$servicePreview->bgcolor}}; color:{{$servicePreview->textcolor}};" class="zoom div{{$servicePreview->item}} item{{$servicePreview->item}} linkModal" data-toggle="modal" data-target="#myModalServicePreview1">
-                            <img style="" class="img-responsive" src="{!!asset($servicePreview->imageHeader)!!}" alt="">~
-                            <h3 class="text-item">{{$servicePreview->ordination}}{{--  <br>
-                                <span>{{$servicePreview->title}}</span>  --}}</h3>
-                            
-                        </div>
+                        @if ($servicePreview->ordination <= 24)
+                            <div style="background-color:{{$servicePreview->bgcolor}}; color:{{$servicePreview->textcolor}};" class="zoom div{{$servicePreview->item}} item{{$servicePreview->item}} linkModal" data-toggle="modal" data-target="#myModalServicePreview1">
+                                <img style="" class="img-responsive" src="{!!asset($servicePreview->imageHeader)!!}" alt="">~
+                                <h3 class="text-item">{{$servicePreview->ordination}}{{--  <br>
+                                    <span>{{$servicePreview->title}}</span>  --}}</h3>                               
+                            </div>          
+                        @endif
+                        
                     @endforeach                    
                 </div>
             </div>
@@ -112,7 +112,7 @@
                         <form method="get"> 
                             <input type="hidden" name="id" value="{{$serviceList->id}}">                          
                             <select style="width:50px;height:25px; padding:2px; font-size:10pt;"onChange="this.form.submit()" name="ordination" id="ordination" class="form-control">
-                                <option {{$serviceList->ordination == 9999 ?'selected="selected"':''}} value= 9999 >0</option>
+                                <option {{$serviceList->ordination > 24 ?'selected="selected"':''}} value= 9999 >0</option>
                                 <option {{$serviceList->ordination == 1 ?'selected="selected"':''}} value= 1 >1</option>
                                 <option {{$serviceList->ordination == 2 ?'selected="selected"':''}} value= 2 >2</option>
                                 <option {{$serviceList->ordination == 3 ?'selected="selected"':''}} value= 3 >3</option>

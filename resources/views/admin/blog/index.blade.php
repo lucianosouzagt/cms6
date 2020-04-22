@@ -11,10 +11,10 @@
 
 @section('content_header')
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <h1>Blog</h1>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <form method="get">
                     <select style="width:90px; height:35px" onChange="this.form.submit()" name="lang" id="lang" class="form-control float-md-right">
                         <option {{$lang == 'en' ?'selected="selected"':''}} value="en">En</option>
@@ -22,8 +22,8 @@
                     </select>
                 </form>
             </div>
-            <div class="col-sm-3">
-                <a href="{{route('blog.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar nova página</a>
+            <div class="col-sm-2">
+                <a href="{{route('blog.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar blog</a>
             </div>
         </div>
 @endsection
@@ -49,7 +49,7 @@
                         <td>{{$blog->id}}</td>
                         <td>{{$blog->title}}</td>
                         <td>{{$blog->lang}}</td>
-                    <td><a style="outline: none;text-decoration: none;color: #55ff55;" href=""class="linkModal" data-toggle="modal" data-target="#myModal{{$blog->id}}"><i class="far fa-eye"></i></a>
+                    <td><a style="outline: none;text-decoration: none;color: #666666;" href=""class="linkModal" data-toggle="modal" data-target="#myModal{{$blog->id}}"><i class="far fa-eye"></i></a>
                         <a style="outline: none;text-decoration: none;color: #5555ff;" href="{{route('blog.edit',['blog'=>$blog->id])}}"><i class="fas fa-edit"></i></a>  
                     <form class="d-inline" method="POST" action="{{route('blog.destroy',['blog'=>$blog->id])}}" onsubmit="return confirm('Tem certeza que deseja excluir a página: {{$blog->title}}')">
                             @csrf
@@ -99,7 +99,7 @@
                                 <h3>Conteúdo</h3>
                             </div>
                             <div class="col-sm-12">
-                                <img width="100%" class="img-responsive img-rounded"src="{!!asset($blog->image)!!}">                            
+                                <img style="width:100%; max-width:800px" class="img-responsive img-rounded"src="{!!asset($blog->image)!!}">                            
                             </div>
                             <div class="col-sm-12">
                                 <span class="dateBody"> {!!$blog->date!!}</span>

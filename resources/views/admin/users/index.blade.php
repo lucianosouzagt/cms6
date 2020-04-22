@@ -9,9 +9,9 @@
 
 
 @section('content_header')
-       <div class="ml-4 mr-4">
-        <h1>Meus Usuários
-            <a href="{{route('users.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar novo Usuário</a>
+       <div>
+        <h1>Meus usuários
+            <a href="{{route('users.create')}}" class="btn btn-primary"style="position: block; float:right; margin-bottom:10px;">Adicionar usuário</a>
         </h1>
        </div>
 @endsection

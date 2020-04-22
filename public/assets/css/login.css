@@ -2,7 +2,7 @@ body{
    background-color: #ff555f;
 }
 .login-page{
-    background-color: #020326;
+    background-color: #222222;
 }
 .login-box{
     background-color: transparent;
@@ -22,8 +22,18 @@ body{
 .btn{
     background-color: transparent;
     color: #fff;
-    border: 1px solid #3333ff;
+    border: 1px solid #555555;
+    transition: 1.2s;
+}
+.btn:hover{
+    background-color: #555555;
+    color: #fff;
+    border: 1px solid #555555;
+    transition: 1.2s;
 }
 span{
     color: #fff
+}
+input{
+    outline: none !important;
 }

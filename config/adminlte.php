@@ -14,9 +14,9 @@ return [
     |
     */
 
-    'title' => 'Laravel CMS',
+    'title' => 'Unax',
     'title_prefix' => '',
-    'title_postfix' => ' - Laravel CMS',
+    'title_postfix' => ' - Unax',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,10 +45,10 @@ return [
     |
     */
 
-    'logo' => '<b>Laravel</b>CMS',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo' => '<b>Unax</b> Offshore',
+    'logo_img' => 'assets/images/x-branco.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_xl' => null,
+    'logo_img_xl' => 'assets/images/logo.png',
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'AdminLTE',
 
@@ -167,17 +167,17 @@ return [
 
     'use_route_url' => false,
 
-    'dashboard_url' => 'painel/',
+    'dashboard_url' => false,
 
     'logout_url' => 'painel/logout',
 
     'login_url' => 'painel/login',
 
-    'register_url' => 'painel/register',
+    'register_url' => false/* 'painel/register' */,
 
     'password_reset_url' => 'password/reset',
 
-    'password_email_url' => 'password/email',
+    'password_email_url' => false /* 'password/email' */,
 
     'profile_url' => false,
 
