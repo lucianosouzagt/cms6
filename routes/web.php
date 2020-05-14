@@ -36,7 +36,9 @@ Route::prefix('painel')->group(function(){
 
     Route::resource('pages','Admin\PageController');
 
-    Route::resource('blog','Admin\BlogController');    
+    Route::resource('blog','Admin\BlogController');
+    
+    Route::resource('lang','Admin\LangController');
 
     Route::resource('service','Admin\ServiceController');
     Route::get('service/done/{id}','Admin\ServiceController@done')->name('service.done');
@@ -45,8 +47,13 @@ Route::prefix('painel')->group(function(){
     Route::put('profile/save','Admin\ProfileController@save')->name('profile.save');
 
     Route::get('settings','Admin\SettingController@index')->name('settings');
-    Route::put('settings/save','Admin\SettingController@save')->name('settings.save');
     Route::get('settings/create','Admin\SettingController@create')->name('settings.create');
+    Route::post('settings/store','Admin\SettingController@store')->name('settings.store');
+    Route::put('settings/save','Admin\SettingController@save')->name('settings.save');
+    Route::get('settings/images','Admin\SettingController@images')->name('settings.images');
+    Route::put('settings/images/save','Admin\SettingController@imagesSave')->name('settings.imagessave');
+    Route::get('settings/networks','Admin\SettingController@networks')->name('settings.networks');
+    Route::put('settings/networks/save','Admin\SettingController@networksSave')->name('settings.networksave');
 });
 
 Route::fallback('Site\PageController@index');

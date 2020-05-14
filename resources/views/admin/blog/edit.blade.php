@@ -1,19 +1,11 @@
 @extends('adminlte::page')
 
-@section('title','Cadastrar Serviços')
+@section('title','Blog')
 
 @section('css')
 <link rel="icon" href="{!!asset('assets/images/favicon.ico')!!}" type="image/x-icon">
     
 @endsection
-
-
-
-{{-- @section('content_header')
-        <h1>Cadastro de Usuário</h1>
-@endsection --}}
-
-
 
 @section('content')
     <style>
@@ -47,27 +39,13 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-header row">
-            <div class="col-sm-6">
-                <h3>Cadastro de Serviço</h3>
-            </div>
-            <div class="col-sm-6">
-                <form method="get">
-                    
-                </form>
-            </div>
-            
-        </div>
         <div class="card-body">
+            <div class="card-header row">
+                <h3>Blog - Editar</h3>
+            </div>
             <form action="{{route('blog.update', ['blog'=>$blog->id])}}" method="POST"class="mt-3 form-horizontal" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                {{-- <div class="form-group row">
-                    <div class="ml-5 custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                      <label class="custom-control-label" for="customSwitch1">Deseja mostrar esse Blog na Pagina Inicial?</label>
-                    </div>
-                </div> --}}
                 <div class="form-group row">
                     <label class="ml-5 col-sm-6 col-form-label" for="news">Deseja mostrar esse Blog na Pagina Inicial?</label>
                     <div class="ml-5 col-sm-2">
@@ -81,21 +59,31 @@
                     <label class="ml-5 col-sm-2 col-form-label" for="lang">Selecione o Idioma </label>
                     <div class="col-sm-6">
                         <select style="width:200px" name="lang" id="lang" class="form-control">
-                            <option {{$blog->lang == 'en' ?'selected="selected"':''}} value="en">English USA</option>
-                            <option {{$blog->lang == 'pt-br' ?'selected="selected"':''}} value="pt-br">Português Brasil</option>
+                            @foreach ($langs as $lang)
+                            <option {{$blog->lang == $lang->lang ?'selected="selected"':''}} value={{$lang->lang}}>{{$lang->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="ml-5 col-sm-2 col-form-label" for="image">Imagem</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                         <input type="file" class="uploadImage form-control-file" name="image" id="image">
+                        <span style="font-size:10px;">
+                            Altura de 1378px a 459px | Largura de 1920px a 640px | Formato png, jpg e jpeg!
+                        </span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="title" class="ml-5 col-sm-2 col-form-label">Título</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-8">
                         <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" value="{{$blog->title}}" placeholder="Digite o título do serviço">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="desc" class="ml-5 col-sm-2 col-form-label">Descrição</label>
+                    <div class="col-sm-8">
+                        <textarea name="description" class="form-control descfield" id="description" rows="4">{{$blog->description}}</textarea>
                     </div>
                 </div>
                 <div class="form-group row">       
@@ -114,12 +102,26 @@
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
 
-tinymce.init({
+    tinymce.init({
         selector:'textarea.bodyfield',
         height:300,
         menubar:false,
         plugins:['link','table','image','lists'],
-        toolbar:'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | table |link image | bullist numlist',
+        toolbar:'undo redo | formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | table |link image | bullist numlist',
+        content_css:[
+            '{{asset('assets/css/content.css')}}'
+        ],
+        images_upload_url:'{{route('imageupload')}}',
+        images_upload_credentials:true,
+        convert_urls:false
+    });
+
+    tinymce.init({
+        selector:'textarea.descfield',
+        height:150,
+        menubar:false,
+        plugins:['link','table','image','lists'],
+        toolbar:'undo redo | formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | table |link image | bullist numlist',
         content_css:[
             '{{asset('assets/css/content.css')}}'
         ],

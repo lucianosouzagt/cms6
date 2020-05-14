@@ -1,19 +1,11 @@
 @extends('adminlte::page')
 
-@section('title','Cadastrar Serviços')
+@section('title','Serviços')
 
 @section('css')
 <link rel="icon" href="{!!asset('assets/images/favicon.ico')!!}" type="image/x-icon">
     
 @endsection
-
-
-
-{{-- @section('content_header')
-        <h1>Cadastro de Usuário</h1>
-@endsection --}}
-
-
 
 @section('content')
     <style>
@@ -47,18 +39,10 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-header row">
-            <div class="col-sm-6">
-                <h3>Cadastro de Serviço</h3>
-            </div>
-            <div class="col-sm-6">
-                <form method="get">
-                    
-                </form>
-            </div>
-            
-        </div>
         <div class="card-body">
+            <div class="card-header row">
+                <h3>Serviço - Editar</h3>
+            </div>
             <form action="{{route('service.update', ['service'=>$service->id])}}" method="POST"class="mt-3 form-horizontal" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -66,15 +50,16 @@
                     <label class="ml-4 col-sm-2 col-form-label" for="lang">Selecione o idioma </label>
                     <div class="col-sm-2">
                         <select style="width:160px" name="lang" id="lang" class="form-control">
-                            <option {{$service->lang == 'en' ?'selected="selected"':''}} value="en">English USA</option>
-                            <option {{$service->lang == 'pt-br' ?'selected="selected"':''}} value="pt-br">Português Brasil</option>
+                            @foreach ($langs as $lang)
+                            <option {{$service->lang == $lang->lang ?'selected="selected"':''}} value={{$lang->lang}}>{{$lang->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <label class="ml-4 col-sm-1 col-form-label" for="status">Status</label>
                     <div class="col-sm-1">                            
                         <select style="width:100px" name="status" id="status" class="form-control">
-                            <option {{$service->status == 1 ?'selected="selected"':''}}value= 1 >Ativo</option>
-                            <option {{$service->status == 0 ?'selected="selected"':''}}value= 0 >Inativo</option>
+                            <option {{$service->status == 0 ?'selected="selected"':''}} value= 0 >Inativo</option>
+                            <option {{$service->status == 1 ?'selected="selected"':''}} value= 1 >Ativo</option>
                         </select>
                     </div>
                     <label class="ml-5 col-sm-2 col-form-label" for="ordination">Ordenação</label>
@@ -123,12 +108,18 @@
                     <label class="ml-4 col-sm-2 col-form-label" for="image">Imagem capa</label>
                     <div class="col-sm-8">
                         <input type="file" class="uploadImage form-control-file" name="image" id="image">
+                        <span style="font-size:10px;">
+                            Altura de 440px a 220px | Largura de 440px a 220px | Formato png!
+                        </span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="ml-4 col-sm-2 col-form-label" for="imageBody">Imagem conteúdo</label>
                     <div class="col-sm-8">
                         <input type="file" class="uploadImage form-control-file" name="imageBody" id="imageBody">
+                        <span style="font-size:10px;">
+                            Altura de 440px a 220px | Largura de 440px a 220px | Formato png!
+                        </span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -164,7 +155,7 @@ tinymce.init({
         height:300,
         menubar:false,
         plugins:['link','table','image','lists'],
-        toolbar:'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | table |link image | bullist numlist',
+        toolbar:'undo redo | formatselect | bold italic forecolor backcolor | alignleft aligncenter alignright alignjustify | table |link image | bullist numlist',
         content_css:[
             '{{asset('assets/css/content.css')}}'
         ],

@@ -9,11 +9,13 @@ use App\Blog;
 use App\Setting;
 use App\Network;
 use App\Client;
+use App\Lang;
 class HomeController extends Controller
 {
     
     public function index(Request $request){
         $lang = $request->input('lang', 'pt-br');
+        $langs = Lang::where('active', 1)->get();
         $i = 1;
         $n = 0;
 
@@ -51,6 +53,7 @@ class HomeController extends Controller
             'networks'=>$networks,
             'images'=>$images,
             'services'=>$services,
+            'langs'=>$langs,
             'lang' =>$lang,
             'news' =>$news
         ]);

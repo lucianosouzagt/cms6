@@ -50,12 +50,31 @@ class ClientController extends Controller
             'image',
             'ordination'
         ]);
+        $validator = Validator::make($data, [
+            'name' => ['required','string', 'max:100'],
+            'image' => ['required','image','mimes:png','dimensions:max_width=300,min_width=75,max_height=150,min_height=30']
+        ]);
+        if($validator->fails()){
+            return redirect()->route('client.create')
+            ->withErrors($validator)
+            ->withInput();
+        }
 
-        if($request->image->isValid()){
+        $imageName = date('YmdHis') . '.' . $request->image->extension();
+        $newImage = $data['image']->storeAs('clients', $imageName);
+        $dbImage = "storage/clients/$imageName";
+        $path = Storage::path($newImage);
+        $newImg = Image::make($path)->resize(150, 64, function($c){
+            $c->aspectRatio();
+            $c->upsize();
+        })->save();
+
+
+        /* if($request->image->isValid()){
             $imageName = date('YmdHis') . '.' . $request->image->extension();
             $dbImage = "media/images/$imageName";
             $request->image->move(public_path('media/images'), $imageName);
-        }
+        } */
 
         $client = new Client;
         $client->status = $data['status'];
@@ -114,22 +133,45 @@ class ClientController extends Controller
                 'image',
                 'ordination'
             ]);
+
+            $validator = Validator::make($data, [
+                'name' => ['required','string', 'max:100'],
+                'image' => ['required','image','mimes:png','dimensions:max_width=300,min_width=75,max_height=150,min_height=30']
+            ]);
+            if($validator->fails()){
+                return redirect()->route('client.edit',[
+                    'client'=>$id
+                ])->withErrors($validator)
+                  ->withInput();
+            }
+            
             
             if(!empty($data['image'])){
-                if($request->image->isValid()){
+                if(!empty($client->imageName)){
+                    $imageName = $client->imageName;
+                }else{
+                    $imageName = date('YmdHis') . '.' . $request->image->extension();
+                    
+                }
+               // $imageName = date('YmdHis') . '.' . $request->image->extension();
+                $newImage = $data['image']->storeAs('clients', $imageName);
+                $dbImage = "storage/clients/$imageName";
+                $path = Storage::path($newImage);
+                $newImg = Image::make($path)->resize(150, 64, function($c){
+                    $c->aspectRatio();
+                    $c->upsize();
+                })->save();
+
+                $client->image = $dbImage;
+                $client->imageName = $imageName;
+                /* if($request->image->isValid()){
                     $imageName = date('YmdHis') . '.' . $request->image->extension();
                     $dbImage = "media/images/$imageName";
                     $request->image->move(public_path('media/images'), $imageName);
-                   /*  $photo = $request->image->storeAs('image', $imageName);
-                    $path = Storage::path($photo);
-                    $newImage = Image::make($path)->resize(100, 100, function($c){
-                        $c->aspectRatio();
-                        $c->upsize();                       
-                    })->save(); */
                     $client->image = $dbImage;
                 }else{
                     $validator->errors()->add('image','Arquivo invalido');
-                }
+                } */
                 
             }
             $client->ordination = $data['ordination'];

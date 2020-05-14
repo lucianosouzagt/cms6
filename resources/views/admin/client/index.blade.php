@@ -40,7 +40,14 @@
                     <tr>
                         <td>{{$client->id}}</td>
                         <td>{{$client->name}}</td>
-                        <td>{{$client->ordenation}}</td>
+                        <td>
+                            @if ($client->ordination > 21)
+                            
+                            @else
+                            {{$client->ordination}}
+                            @endif
+                            
+                        </td>
                     <td><a style="outline: none;text-decoration: none;color: #5555ff;" href="{{route('client.edit',['client'=>$client->id])}}"><i class="fas fa-edit"></i></a>  
                     <form class="d-inline" method="POST" action="{{route('client.destroy',['client'=>$client->id])}}" onsubmit="return confirm('Tem certeza que deseja excluir a página: {{$client->name}}')">
                             @csrf

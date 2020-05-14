@@ -7,13 +7,6 @@
     
 @endsection
 
-
-{{-- @section('content_header')
-        <h1>Cadastro de Usuário</h1>
-@endsection --}}
-
-
-
 @section('content')
 
     @if($errors->any())
@@ -30,10 +23,10 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-header">
-            <h3>Cadastro de usuário</h3>
-        </div>
         <div class="card-body">
+            <div class="card-header">
+                <h3>Usuário - Cadastro</h3>
+            </div>
             <form action="{{route('users.store')}}" method="POST"class="mt-3 form-horizontal">
                 @csrf
                 <div class="form-group row">

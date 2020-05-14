@@ -229,7 +229,12 @@ return [
             'icon'        => 'fas fa-fw fa-blog',
         ],
         ['header' => 'Site'],
-               [
+        [
+            'text' => 'Idiomas',
+            'url'  => 'painel/lang',
+            'icon' => 'fas fa-fw fa-globe',
+        ],
+        [
             'text' => 'Serviços',
             'url'  => 'painel/service',
             'icon' => 'fas fa-fw fa-tools',
@@ -243,6 +248,16 @@ return [
             'text' => 'Informações Gerais',
             'url'  => 'painel/settings',
             'icon' => 'fas fa-fw fa-info',
+        ],
+        [
+            'text' => 'Imagens',
+            'url'  => 'painel/settings/images',
+            'icon' => 'fas fa-fw fa-images',
+        ],
+        [
+            'text' => 'Redes Sociais',
+            'url'  => 'painel/settings/networks',
+            'icon' => 'fas fa-fw fa-project-diagram',
         ],
         
         ['header' => 'Configurações'],

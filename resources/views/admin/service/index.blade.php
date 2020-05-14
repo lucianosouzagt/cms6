@@ -16,9 +16,10 @@
             </div>
             <div class="col-md-2">
                 <form method="get">
-                    <select style="width:90px; height:35px" onChange="this.form.submit()" name="lang" id="lang" class="form-control float-md-right">
-                        <option {{$lang == 'en' ?'selected="selected"':''}} value="en">En</option>
-                        <option {{$lang == 'pt-br' ?'selected="selected"':''}} value="pt-br">Pt-BR</option>
+                    <select style="width:160px; height:35px" onChange="this.form.submit()" name="lang" id="lang" class="form-control float-md-right">
+                        @foreach ($langs as $item)
+                        <option {{$lang == $item->lang ?'selected="selected"':''}} value="{{$item->lang}}">{{$item->name}}</option>
+                        @endforeach
                     </select>
                 </form>
             </div>
@@ -95,9 +96,8 @@
                     @foreach ($servicesPreview as $servicePreview)
                         @if ($servicePreview->ordination <= 24)
                             <div style="background-color:{{$servicePreview->bgcolor}}; color:{{$servicePreview->textcolor}};" class="zoom div{{$servicePreview->item}} item{{$servicePreview->item}} linkModal" data-toggle="modal" data-target="#myModalServicePreview1">
-                                <img style="" class="img-responsive" src="{!!asset($servicePreview->imageHeader)!!}" alt="">~
-                                <h3 class="text-item">{{$servicePreview->ordination}}{{--  <br>
-                                    <span>{{$servicePreview->title}}</span>  --}}</h3>                               
+                                <img style="" class="img-responsive" src="{!!asset($servicePreview->imageHeader)!!}" alt="">
+                                <h3 class="text-item">{{$servicePreview->ordination}}</h3>                               
                             </div>          
                         @endif
                         

@@ -30,10 +30,11 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-header">
-            <h3>Editar usuário</h3>
-        </div>
+        
         <div class="card-body">
+            <div class="card-header">
+                <h3>Usuário - Editar</h3>
+            </div>
             <form action="{{route('users.update', ['user'=>$user->id])}}" method="POST"class="mt-3 form-horizontal">
                 @csrf
                 @method('PUT')

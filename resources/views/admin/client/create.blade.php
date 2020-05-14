@@ -1,19 +1,11 @@
 @extends('adminlte::page')
 
-@section('title','Cadastrar Blog')
+@section('title','Clientes')
 
 @section('css')
 <link rel="icon" href="{!!asset('assets/images/favicon.ico')!!}" type="image/x-icon">
     
 @endsection
-
-
-
-{{-- @section('content_header')
-        <h1>Cadastro de Usuário</h1>
-@endsection --}}
-
-
 
 @section('content')
     <style>
@@ -47,18 +39,10 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-header row">
-            <div class="col-sm-6">
-                <h3>Cadastro de clinte</h3>
-            </div>
-            <div class="col-sm-6">
-                <form method="get">
-                    
-                </form>
-            </div>
-            
-        </div>
         <div class="card-body">
+            <div class="card-header row">
+                <h3>Cliente - Cadastro</h3>
+            </div>
             <form action="{{route('client.store')}}" method="POST"class="mt-3 form-horizontal" enctype="multipart/form-data">
                 @csrf
 
@@ -73,7 +57,7 @@
                     <label class="ml-5 col-sm-2 col-form-label" for="ordination">Ordenação</label>
                     <div class="col-sm-1">                            
                         <select style="width:110px" name="ordination" id="ordination" class="form-control">
-                            <option selected="selected"value= null >0</option>
+                            <option selected="selected"value= 99999 >0</option>
                             <option value= 1 >1</option>
                             <option value= 2 >2</option>
                             <option value= 3 >3</option>
@@ -107,9 +91,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="ml-5 col-sm-2 col-form-label" for="image">Imagem</label>
+                    <label class="ml-5 col-sm-2 col-form-label" data-toggle="tooltip" data-placement="top" title="Insira imagens com fundo transparente ou branco, no formato png ou jpg!" for="image">Imagem</label>
                     <div class="col-sm-6">
-                        <input type="file" class="uploadImage form-control-file" name="image" id="image">
+                        <input type="file" class="uploadImage form-control-file" name="image" id="image" value="{{old('image')}}">
+                        <span style="font-size:10px;">
+                            Altura de 150px a 30px | Largura de 300px a 75px | Formato png e jpg com fundo trasnparente ou branco!
+                        </span>
                     </div>
                 </div>
                 <button type="submit" class="ml-5 mt-2 btn btn-success">Cadastrar</button>

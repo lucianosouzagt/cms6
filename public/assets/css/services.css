@@ -23,10 +23,14 @@
     .item22 { grid-area:A9 }
     .item23 { grid-area:Aa }
     .item24 { grid-area:Ab }
+    
+    .service{
+        padding: 0 !important;
+    }
 
 @media (min-width: 1025px){
-    .container{
-        max-width: 1180px !important;
+    .service{
+        max-width: 1100px !important;
     }
     .div3,
     .div4,
@@ -40,8 +44,8 @@
     .div23,
     .div24{
         box-sizing: border-box;
-        width: 228px;
-        height: 228px;
+        width: 220px;
+        height: 220px;
     }
     .div1,
     .div2,
@@ -53,16 +57,30 @@
     .div20,
     .div21{
         box-sizing: border-box;
-        width: 456px;
-        height: 228px;
+        width: 440px;
+        height: 220px;
     }
+
+    .div1 img,
+    .div2 img,
+    .div10 img,
+    .div12 img,
+    .div13 img,
+    .div16 img,
+    .div19 img,
+    .div20 img,
+    .div21 img{
+        width: 440px;
+        height: 220px;
+    }
+
     .div5,
     .div6,
     .div8,
     .div14{
         box-sizing: border-box;
-        width: 456px;
-        height: 456px;
+        width: 440px;
+        height: 440px;
     }
 
     .grid-container {
@@ -90,7 +108,7 @@
         margin: 70px auto;
     }
 }
-@media (min-width: 768px) and (max-width: 1024px) {
+@media (min-width: 881px) and (max-width: 1024px) {
   
     .grid-container{
         display: grid;
@@ -113,6 +131,10 @@
         
     .grid-container{
         margin: 70px auto;
+        width: 880px;
+    }
+    .container{
+        max-width: 880px;
     }
     .grid-container > div{
         font-size: 18pt;
@@ -129,9 +151,8 @@
     .div23,
     .div24{
         box-sizing: border-box;
-        max-width: 240px;
-        width: 100%;
-        height: 240px;
+        width: 220px;
+        height: 220px;
     }
     .div1,
     .div2,
@@ -143,42 +164,52 @@
     .div20,
     .div21{
         box-sizing: border-box;
-        max-width: 480px;
-        width: 100%;
-        height: 240px;
+        width: 440px;
+        height: 220px;
     }
     .div5,
     .div6,
     .div8,
     .div14{
         box-sizing: border-box;
-        max-width: 480px;
-        width: 100%;
-        height: 480px;
+        width: 440px;
+        height: 440px;
     }
 }
-@media (min-width: 481px) and (max-width: 767px) {
+@media (min-width: 481px) and (max-width: 880px) {
 
     .grid-container{
         display: grid;
         grid-template-areas:
-            'B1 B1 B2 B2'
-            'A1 A2 C1 C1'
-            'A3 A4 C1 C1'
-            'B3 B3 C2 C2'
-            'C3 C3 C2 C2'
-            'C3 C3 B4 B4'
-            'A5 A6 B5 B5'
-            'C4 C4 B6 B6'
-            'C4 C4 A7 A8'
-            'A9 B7 B7 Aa'
-            'B8 B8 B9 B9'
-            'Ab Ab Ab Ab';
+            'B1 B1'
+            'B2 B2'
+            'A1 A2'
+            'C1 C1'
+            'C1 C1'
+            'A3 A4'
+            'C2 C2'
+            'C2 C2'
+            'C3 C3'
+            'C3 C3'
+            'B3 B3'
+            'B4 B4'
+            'A5 A6'
+            'B5 B5'
+            'C4 C4'
+            'C4 C4'
+            'B6 B6'
+            'A7 A8'
+            'B7 B7'
+            'B8 B8'
+            'B9 B9'
+            'A9 Aa'
+            'Ab Ab';
         margin: auto;
     }
    
     .grid-container{
         margin: 70px auto;
+        max-width: 440px;
     }
     .grid-container > div{
         font-size: 18pt;
@@ -195,9 +226,8 @@
     .div23,
     .div24{
         box-sizing: border-box;
-        max-width: 180px;
-        width: 100%;
-        height: 180px;
+        width: 220px;
+        height: 220px;
     }
     .div1,
     .div2,
@@ -209,24 +239,23 @@
     .div20,
     .div21{
         box-sizing: border-box;
-        max-width: 360px;
-        width: 100%;
-        height: 180px;
+        width: 440px;
+        height: 220px;
     }
     .div5,
     .div6,
     .div8,
     .div14{
         box-sizing: border-box;
-        max-width: 360px;
-        width: 100%;
-        height: 360px;
+        width: 440px;
+        height: 440px;
     }
 
 }
 
 @media (max-width: 480px) {
     .grid-container{
+        max-width: 440px;
         display: grid;
         grid-template-areas:
             'B1 B1'
@@ -256,6 +285,7 @@
     }
     .grid-container > div{
         font-size: 18pt;
+       
     }
     .div3,
     .div4,
@@ -269,8 +299,8 @@
     .div23,
     .div24{
         box-sizing: border-box;
-        width: 100%;
-        height: 180px;
+        width: 220px;
+        height: 220px;
     }
     .div1,
     .div2,
@@ -282,16 +312,16 @@
     .div20,
     .div21{
         box-sizing: border-box;
-        width: 100%;
-        height: 180px;
+        width: 440px;
+        height: 220px;
     }
     .div5,
     .div6,
     .div8,
     .div14{
         box-sizing: border-box;
-        width: 100%;
-        height: 360px;
+        width: 440px;
+        height: 440px;
     }
 }
 .zoom{

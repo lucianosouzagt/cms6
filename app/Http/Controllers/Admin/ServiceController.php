@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Service;
+use App\Lang;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ServiceController extends Controller
 {
@@ -18,32 +21,34 @@ class ServiceController extends Controller
      */
     public function index(Request $request)
     {
-        $langs = $request->input('lang', 'pt-br');
+        $lang = $request->input('lang', 'pt-br');
+        $langs = Lang::all();
 
         if(($request->input('id'))&&($request->input('ordination'))){
             $servi = $request->all();
             $serv = Service::find($servi['id']);
-            $old = Service::where('ordination',$servi['ordination'])->where('lang',$langs)->update(['ordination'=>$serv['ordination']]);
+            $old = Service::where('ordination',$servi['ordination'])->where('lang',$lang)->update(['ordination'=>$serv['ordination']]);
             $serv->ordination = $servi['ordination'];
             $serv->save();
 
         }
                 
         $i = 1;
-        $servicesPreview = Service::where('lang',$langs)->where('status', 1)->orderBy('ordination','asc')->limit(24)->get();
+        $servicesPreview = Service::where('lang',$lang)->where('status', 1)->orderBy('ordination','asc')->limit(24)->get();
         foreach ($servicesPreview as $servicePreview) {
             
             $servicePreview['item'] = $i;
             $i = $i + 1;
         }
-        $servicesList = Service::where('lang',$langs)->where('status', 1)->orderBy('ordination','asc')->get();
-        $services = Service::where('lang',$langs)->orderBy('id', 'desc')->paginate(10);
+        $servicesList = Service::where('lang',$lang)->where('status', 1)->orderBy('ordination','asc')->get();
+        $services = Service::where('lang',$lang)->orderBy('id', 'desc')->paginate(10);
 
         return view('admin.service.index',[
             'services'=> $services,
             'servicesPreview'=>$servicesPreview,
             'servicesList'=>$servicesList,
-            'lang'=> $langs
+            'langs'=> $langs,
+            'lang'=> $lang
             
         ]);
 
@@ -54,12 +59,11 @@ class ServiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        $langs = 'pt-br';
-
+        $langs = Lang::where('active', 1 )->get();
         return view('admin.service.create',[
-            'lang'=> $langs
+            'langs'=> $langs
         ]);
     }
 
@@ -82,30 +86,39 @@ class ServiceController extends Controller
             'bgcolor',
             'textcolor'
         ]);
-        if($request->file('image')){
-            if($request->image->isValid()){
-                $imageName = 'header'.date('His') . '.' . $request->image->extension();
-                $dbImage = "media/images/$imageName";
-                $request->image->move(public_path('media/images'), $imageName);
-                /* $request->image->storeAs('image', $imageName); */
-                $service->imageHeader = $dbImage;
-            }
-        }
-        if($request->file('imageBody')){
-            if($request->imageBody->isValid()){
-                $imageName = 'body'.date('His') . '.' . $request->imageBody->extension();
-                $dbImage1 = "media/images/$imageName";
-                $request->imageBody->move(public_path('media/images'), $imageName);
-                /* $request->image->storeAs('image', $imageName); */
-                $service->imageBody = $dbImage1;
-            }
-        }   
 
         $validator = Validator::make($data, [
             'title'=>['required','string','max:100'],
-            'body'=>['required','string']
+            'body'=>['required','string'],
+            'imageHeader'=> ['required','image','mimes:png','dimensions:max_width=440,min_width=220,max_height=440,min_height=220'],
+            'imageBody'=> ['required','image','mimes:png','dimensions:max_width=440,min_width=220,max_height=440,min_height=220'],
             
         ]);
+
+        if($request->file('image')){
+            $imageName = 'header'.date('His') . '.' . $request->image->extension();
+            $newImage = $data['imageHeader']->storeAs('clients', $imageName);
+            $dbImage = "storage/services/$imageName";
+            $path = Storage::path($newImage);
+            $newImg = Image::make($path)->resize(440, 440, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            })->save();
+            $service->imageHeader = $dbImage;
+        }
+        if($request->file('imageBody')){
+            $imageName = 'body'.date('His') . '.' . $request->imageBody->extension();
+            $newImage = $data['imageBody']->storeAs('clients', $imageName);
+            $dbImage1 = "storage/services/$imageName";
+            $path = Storage::path($newImage);
+            $newImg = Image::make($path)->resize(440, 440, function($c){
+                $c->aspectRatio();
+                $c->upsize();
+            })->save();
+            $service->imageBody = $dbImage1;
+        }   
+
+        
 
         if($validator->fails()){
             return redirect()->route('service.create')
@@ -145,10 +158,12 @@ class ServiceController extends Controller
      */
     public function edit($id)
     {
+        $langs = Lang::where('active', 1 )->get();
         $service = Service::find($id);
         if($service){
             return view('admin.service.edit',[
-                'service'=> $service
+                'service'=> $service,
+                'langs'=> $langs
             ]);
         }
         return view('service.index');
@@ -176,10 +191,10 @@ class ServiceController extends Controller
                 'bgcolor',
                 'textcolor',
                 'body',
-                'imageHeader',
+                'image',
                 'imageBody'
             ]);
-            
+
             $validator = Validator::make([
                 'title'=>$data['title'],
                 'subtitle'=>$data['subtitle'],
@@ -195,9 +210,14 @@ class ServiceController extends Controller
             if(!empty($data['image'])){
                 if($request->image->isValid()){
                     $imageName = 'header'.date('YmdHis') . '.' . $request->image->extension();
-                    $dbImage = "media/images/$imageName";
-                    $request->image->move(public_path('media/images'), $imageName);
-                    /* $request->image->storeAs('image', $imageName); */
+                    $newImage = $data['image']->storeAs('services', $imageName);
+                    $dbImage = "storage/services/$imageName";
+                    $path = Storage::path($newImage);
+                    $newImg = Image::make($path)->resize(440, 440, function($c){
+                        $c->aspectRatio();
+                        $c->upsize();
+                    })->save();
+
                     $service->imageHeader = $dbImage;
                 }else{
                     $validator->errors()->add('image','Arquivo invalido');
@@ -207,10 +227,15 @@ class ServiceController extends Controller
             if(!empty($data['imageBody'])){
                 if($request->imageBody->isValid()){
                     $imageNameBody = 'body'.date('YmdHis') . '.' . $request->imageBody->extension();
-                    $dbImageBody = "media/images/$imageNameBody";
-                    $request->imageBody->move(public_path('media/images'), $imageNameBody);
-                    /* $request->image->storeAs('image', $imageName); */
-                    $service->imageBody = $dbImageBody;
+                    $newImage = $data['imageBody']->storeAs('services', $imageNameBody);
+                    $dbImage1 = "storage/services/$imageNameBody";
+                    $path = Storage::path($newImage);
+                    $newImg = Image::make($path)->resize(440, 440, function($c){
+                        $c->aspectRatio();
+                        $c->upsize();
+                    })->save();
+
+                    $service->imageBody = $dbImage1;
                 }else{
                     $validator->errors()->add('image','Arquivo invalido');
                 }

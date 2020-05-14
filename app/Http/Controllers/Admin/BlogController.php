@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Blog;
+use App\Lang;
+use Highlight\Language;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BlogController extends Controller
 {
@@ -18,13 +22,14 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        $langs = $request->input('lang', 'pt-br');
-       
-        $blogs = Blog::where('lang',$langs)->orderBy('id', 'desc')->paginate(10);
+        $lang = $request->input('lang', 'pt-br');
+        $langs = Lang::where('active', 1 )->get();
+        $blogs = Blog::where('lang',$lang)->orderBy('id', 'desc')->paginate(10);
 
         return view('admin.blog.index',[
             'blogs'=> $blogs,
-            'lang'=> $langs
+            'lang'=> $lang,
+            'langs'=> $langs
             
         ]);
 
@@ -37,11 +42,11 @@ class BlogController extends Controller
      */
     public function create(Request $request)
     {
-        $langs = $request->input('lang', 'pt-br');
+        $langs = Lang::where('active', 1 )->get();
         $news = $request->input('news', 0);
 
         return view('admin.blog.create',[
-            'lang'=> $langs,
+            'langs'=> $langs,
             'news'=> $news
         ]);
     }
@@ -62,34 +67,38 @@ class BlogController extends Controller
             'description',
             'body'
         ]);
-
+            
         $data['new'] = intval($data['news']);
 
-        if($data['new'] === 1){
-            $blog->news = $data['new'];
-        }
-
-        if($request->image->isValid()){
-            $imageName = date('YmdHms') . '.' . $request->image->extension();
-            $dbImage = "media/images/$imageName";
-            $request->image->move(public_path('media/images'), $imageName);
-            /* $request->image->storeAs('image', $imageName); */
-        }
-
         $validator = Validator::make($data, [
+            'image' => ['required','image','mimes:jpeg,jpg,png','dimensions:max_width=1920,min_width=640,max_height=1378,min_height=459'],
             'title'=>['required','string','max:100'],
             'description'=>['required','string','max:250'],
-            'body'=>['required','string']
-            
+            'body'=>['required','string']            
         ]);
+
+        $imageName = date('YmdHis') . '.' . $request->image->extension();
+        $newImage = $data['image']->storeAs('blogs', $imageName);
+        $dbImage = "storage/blogs/$imageName";
+        $path = Storage::path($newImage);
+        $newImg = Image::make($path)->resize(880, 632, function($c){
+            $c->aspectRatio();
+            $c->upsize();
+        })->save();
+
 
         if($validator->fails()){
             return redirect()->route('blog.create')
             ->withErrors($validator)
             ->withInput();
         }
-
+  
         $blog = new Blog;
+
+        if($data['new'] === 1){
+            $blog->news = $data['new'];
+        }
+
         $blog->title = $data['title'];
         $blog->description = $data['description'];
         $blog->image = $dbImage;
@@ -121,9 +130,11 @@ class BlogController extends Controller
     public function edit($id)
     {
         $blog = Blog::find($id);
+        $langs = Lang::where('active', 1 )->get();
         if($blog){
             return view('admin.blog.edit',[
-                'blog'=> $blog
+                'blog'=> $blog,
+                'langs'=> $langs
             ]);
         }
         return view('blog.index');

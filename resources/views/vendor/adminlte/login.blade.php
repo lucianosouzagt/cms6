@@ -74,14 +74,16 @@
                         </div> --}}
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block btn-flat">
-                                {{ __('adminlte::adminlte.sign_in') }}
+                                Entrar
+                                {{-- {{ __('adminlte::adminlte.sign_in') }} --}}
                             </button>
                         </div>
                     </div>
                 </form>
                 <p class="mt-2 mb-1">
                     <a href="{{ $password_reset_url }}">
-                        {{ __('adminlte::adminlte.i_forgot_my_password') }}
+                        Esqueci minha senha
+                        {{-- {{ __('adminlte::adminlte.i_forgot_my_password') }} --}}
                     </a>
                 </p>
                 @if ($register_url)

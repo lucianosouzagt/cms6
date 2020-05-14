@@ -16,9 +16,10 @@
             </div>
             <div class="col-md-2">
                 <form method="get">
-                    <select style="width:90px; height:35px" onChange="this.form.submit()" name="lang" id="lang" class="form-control float-md-right">
-                        <option {{$lang == 'en' ?'selected="selected"':''}} value="en">En</option>
-                        <option {{$lang == 'pt-br' ?'selected="selected"':''}} value="pt-br">Pt-BR</option>
+                    <select style="width:160px; height:35px" onChange="this.form.submit()" name="lang" id="lang" class="form-control float-md-right">
+                        @foreach ($langs as $item)
+                        <option {{$lang == $item->lang ?'selected="selected"':''}} value="{{$item->lang}}">{{$item->name}}</option>
+                        @endforeach
                     </select>
                 </form>
             </div>
@@ -104,8 +105,7 @@
                             <div class="col-sm-12">
                                 <span class="dateBody"> {!!$blog->date!!}</span>
                                 <h2 class="mt-3 blogTitle">{{$blog->title}}</h2>
-                                <h3 class="titleDesc py-3">{{$blog->description}}</h3>
-                                 
+                                <p class="titleDesc py-3">{{$blog->description}}</p>                                 
                                 <hr>                
                                 <p class="py-3">{!!$blog->content!!}</p>
                             </div> 
